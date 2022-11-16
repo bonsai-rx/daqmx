@@ -1,9 +1,5 @@
-﻿using Bonsai;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System;
 using System.Reactive.Linq;
-using System.Text;
 using OpenCV.Net;
 using NationalInstruments.DAQmx;
 using System.Runtime.InteropServices;
