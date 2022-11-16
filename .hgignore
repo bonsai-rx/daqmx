@@ -1,6 +1,0 @@
-syntax: glob
-bin
-packages
-Bonsai.DAQmx/bin
-Bonsai.DAQmx/obj
-*.suo
