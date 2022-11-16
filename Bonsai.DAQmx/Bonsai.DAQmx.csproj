@@ -1,127 +1,28 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\packages\OpenCV.Net.3.3.1\build\net40\OpenCV.Net.props" Condition="Exists('..\packages\OpenCV.Net.3.3.1\build\net40\OpenCV.Net.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Release</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>8.0.30703</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{A58E048E-C143-4A07-8D6F-ED82949262CB}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Bonsai.DAQmx</RootNamespace>
-    <AssemblyName>Bonsai.DAQmx</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
-    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
-    <RestorePackages>true</RestorePackages>
+    <Title>Bonsai - DAQmx Library</Title>
+    <Description>Bonsai DAQmx Library containing modules for acquisition and control of NI-DAQmx boards.</Description>
+    <PackageTags>Bonsai Rx DAQmx</PackageTags>
+    <TargetFramework>net462</TargetFramework>
+    <VersionPrefix>0.2.0</VersionPrefix>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
-    <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <DebugType>full</DebugType>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>ManagedMinimumRules.ruleset</CodeAnalysisRuleSet>
-    <CodeAnalysisFailOnMissingRules>true</CodeAnalysisFailOnMissingRules>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <Optimize>true</Optimize>
-    <DebugType>pdbonly</DebugType>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>ManagedMinimumRules.ruleset</CodeAnalysisRuleSet>
-    <CodeAnalysisFailOnMissingRules>true</CodeAnalysisFailOnMissingRules>
-    <BuildPackage>true</BuildPackage>
-  </PropertyGroup>
+
   <ItemGroup>
-    <Reference Include="Bonsai.Core, Version=2.4.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Bonsai.Core.2.4.0\lib\net45\Bonsai.Core.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
+    <PackageReference Include="Bonsai.Core" Version="2.7.0" />
+    <PackageReference Include="OpenCV.Net" Version="3.4.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Bonsai.DAQmx.props" PackagePath="build\net462" />
+    <Content Include="..\Externals\DAQmx\*\*.dll" PackagePath="build\net462\bin" />
+    <Content Include="..\Externals\DAQmx\*.dll" PackagePath="lib\net462" />
     <Reference Include="NationalInstruments.Common">
       <HintPath>..\Externals\DAQmx\NationalInstruments.Common.dll</HintPath>
     </Reference>
-    <Reference Include="NationalInstruments.DAQmx" Condition="'$(Platform.ToLower())' == 'x86' Or '$(Platform.ToLower())' == 'anycpu'">
-      <HintPath>..\Externals\DAQmx\x86\NationalInstruments.DAQmx.dll</HintPath>
-    </Reference>
-    <Reference Include="NationalInstruments.DAQmx" Condition="'$(Platform.ToLower())' == 'x64'">
+    <Reference Include="NationalInstruments.DAQmx">
       <HintPath>..\Externals\DAQmx\x64\NationalInstruments.DAQmx.dll</HintPath>
     </Reference>
-    <Reference Include="OpenCV.Net, Version=3.3.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\OpenCV.Net.3.3.1\lib\net40\OpenCV.Net.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Reactive.Core, Version=2.2.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Rx-Core.2.2.5\lib\net45\System.Reactive.Core.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Reactive.Interfaces, Version=2.2.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Rx-Interfaces.2.2.5\lib\net45\System.Reactive.Interfaces.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Reactive.Linq, Version=2.2.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Rx-Linq.2.2.5\lib\net45\System.Reactive.Linq.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
-  <ItemGroup>
-    <Compile Include="AnalogInputChannelConfiguration.cs" />
-    <Compile Include="AnalogChannelConfiguration.cs" />
-    <Compile Include="AnalogChannelConfigurationConverter.cs" />
-    <Compile Include="AnalogInput.cs" />
-    <Compile Include="AnalogInputPhysicalChannelConverter.cs" />
-    <Compile Include="AnalogOutput.cs" />
-    <Compile Include="AnalogOutputChannelConfiguration.cs" />
-    <Compile Include="AnalogOutputPhysicalChannelConverter.cs" />
-    <Compile Include="DigitalInputPhysicalChannelConverter.cs" />
-    <Compile Include="DigitalInputChannelConfiguration.cs" />
-    <Compile Include="DigitalOutputChannelConfiguration.cs" />
-    <Compile Include="DigitalOutputPhysicalChannelConverter.cs" />
-    <Compile Include="DigitalChannelConfiguration.cs" />
-    <Compile Include="DigitalOutput.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Bonsai.DAQmx.nuspec">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Bonsai.DAQmx.props">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <PropertyGroup>
-    <StartAction>Program</StartAction>
-    <StartProgram>$(registry:HKEY_CURRENT_USER\Software\Goncalo Lopes\Bonsai@InstallDir)Bonsai64.exe</StartProgram>
-    <StartArguments>--lib:"$(TargetDir)."</StartArguments>
-  </PropertyGroup>
-  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('..\packages\OpenCV.Net.3.3.1\build\net40\OpenCV.Net.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\OpenCV.Net.3.3.1\build\net40\OpenCV.Net.props'))" />
-    <Error Condition="!Exists('..\packages\OpenCV.Net.3.3.1\build\net40\OpenCV.Net.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\OpenCV.Net.3.3.1\build\net40\OpenCV.Net.targets'))" />
-  </Target>
-  <Import Project="..\packages\OpenCV.Net.3.3.1\build\net40\OpenCV.Net.targets" Condition="Exists('..\packages\OpenCV.Net.3.3.1\build\net40\OpenCV.Net.targets')" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
+
 </Project>
