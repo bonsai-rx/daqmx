@@ -2,7 +2,6 @@
 using System.Reactive.Linq;
 using OpenCV.Net;
 using NationalInstruments.DAQmx;
-using System.Runtime.InteropServices;
 using System.Reactive.Disposables;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -47,40 +46,69 @@ namespace Bonsai.DAQmx
             get { return channels; }
         }
 
+        Task CreateTask()
+        {
+            var task = new Task();
+            foreach (var channel in channels)
+            {
+                task.AIChannels.CreateVoltageChannel(channel.PhysicalChannel, channel.ChannelName, channel.TerminalConfiguration, channel.MinimumValue, channel.MaximumValue, channel.VoltageUnits);
+            }
+
+            return task;
+        }
+
         public override IObservable<Mat> Generate()
         {
             return Observable.Create<Mat>(observer =>
             {
-                var task = new Task();
-                foreach (var channel in channels)
-                {
-                    task.AIChannels.CreateVoltageChannel(channel.PhysicalChannel, channel.ChannelName, channel.TerminalConfiguration, channel.MinimumValue, channel.MaximumValue, channel.VoltageUnits);
-                }
-
+                var task = CreateTask();
                 task.Timing.ConfigureSampleClock(SignalSource, SampleRate, ActiveEdge, SampleMode, BufferSize);
                 task.Control(TaskAction.Verify);
                 var analogInReader = new AnalogMultiChannelReader(task.Stream);
+                var samplesPerChannel = SamplesPerRead < 0 ? BufferSize : SamplesPerRead;
                 AsyncCallback analogCallback = null;
                 analogCallback = new AsyncCallback(result =>
                 {
                     var data = analogInReader.EndReadMultiSample(result);
-                    var dataHandle = GCHandle.Alloc(data, GCHandleType.Pinned);
-                    try
-                    {
-                        var output = new Mat(data.GetLength(0), data.GetLength(1), Depth.F64, 1, dataHandle.AddrOfPinnedObject());
-                        observer.OnNext(output.Clone());
-                        analogInReader.BeginReadMultiSample(SamplesPerRead < 0 ? BufferSize : SamplesPerRead, analogCallback, null);
-                    }
-                    finally { dataHandle.Free(); }
+                    var output = Mat.FromArray(data);
+                    observer.OnNext(output);
+                    analogInReader.BeginReadMultiSample(samplesPerChannel, analogCallback, null);
                 });
 
                 analogInReader.SynchronizeCallbacks = true;
-                analogInReader.BeginReadMultiSample(SamplesPerRead < 0 ? BufferSize : SamplesPerRead, analogCallback, null);
+                analogInReader.BeginReadMultiSample(samplesPerChannel, analogCallback, null);
                 return Disposable.Create(() =>
                 {
                     task.Stop();
                     task.Dispose();
                 });
+            });
+        }
+
+        public IObservable<Mat> Generate<TSource>(IObservable<TSource> source)
+        {
+            return Observable.Defer(() =>
+            {
+                var task = CreateTask();
+                var sampleRate = SampleRate;
+                if (sampleRate > 0)
+                {
+                    task.Timing.ConfigureSampleClock(SignalSource, sampleRate, ActiveEdge, SampleMode, BufferSize);
+                }
+                task.Control(TaskAction.Verify);
+                var analogInReader = new AnalogMultiChannelReader(task.Stream);
+                var samplesPerChannel = SamplesPerRead < 0 ? BufferSize : SamplesPerRead;
+                return Observable.Using(() => Disposable.Create(
+                    () =>
+                    {
+                        task.Stop();
+                        task.Dispose();
+                    }),
+                    resource => source.Select(_ =>
+                    {
+                        var data = analogInReader.ReadMultiSample(samplesPerChannel);
+                        return Mat.FromArray(data);
+                    }));
             });
         }
     }
