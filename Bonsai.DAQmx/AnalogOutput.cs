@@ -9,6 +9,7 @@ using System.ComponentModel;
 
 namespace Bonsai.DAQmx
 {
+    [DefaultProperty(nameof(Channels))]
     [Description("Writes a sequence of sample buffers to one or more DAQmx analog output channels.")]
     public class AnalogOutput : Sink<Mat>
     {

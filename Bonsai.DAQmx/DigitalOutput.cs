@@ -9,6 +9,7 @@ using System.Runtime.InteropServices;
 
 namespace Bonsai.DAQmx
 {
+    [DefaultProperty(nameof(Channels))]
     [Description("Writes a sequence of logical values to one or more DAQmx digital output channels.")]
     public class DigitalOutput : Sink<Mat>
     {
