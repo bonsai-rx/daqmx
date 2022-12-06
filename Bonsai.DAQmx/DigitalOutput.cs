@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Reactive.Linq;
 using NationalInstruments.DAQmx;
 using System.Reactive.Disposables;
@@ -68,7 +68,11 @@ namespace Bonsai.DAQmx
                         task.Stop();
                         task.Dispose();
                     }),
-                    resource => source.Do(input => onNext(digitalOutWriter, input)));
+                    resource => source.Do(input =>
+                    {
+                        try { onNext(digitalOutWriter, input); }
+                        catch { task.Stop(); throw; }
+                    }));
             });
         }
 
@@ -116,6 +120,7 @@ namespace Bonsai.DAQmx
                             else CV.Copy(input, dataHeader);
                             digitalOutWriter.WriteMultiSamplePort(autoStart: true, data);
                         }
+                        catch { task.Stop(); throw; }
                         finally { dataHandle.Free(); }
                     }));
             });
