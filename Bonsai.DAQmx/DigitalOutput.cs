@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Reactive.Linq;
 using NationalInstruments.DAQmx;
 using System.Reactive.Disposables;
@@ -43,17 +43,23 @@ namespace Bonsai.DAQmx
             get { return channels; }
         }
 
-        public IObservable<bool> Process(IObservable<bool> source)
+        Task CreateTask()
+        {
+            var task = new Task();
+            foreach (var channel in channels)
+            {
+                task.DOChannels.CreateChannel(channel.Lines, channel.ChannelName, channel.Grouping);
+            }
+
+            task.Control(TaskAction.Verify);
+            return task;
+        }
+
+        IObservable<TSource> Process<TSource>(IObservable<TSource> source, Action<DigitalMultiChannelWriter, TSource> onNext)
         {
             return Observable.Defer(() =>
             {
-                var task = new Task();
-                foreach (var channel in channels)
-                {
-                    task.DOChannels.CreateChannel(channel.Lines, channel.ChannelName, channel.Grouping);
-                }
-
-                task.Control(TaskAction.Verify);
+                var task = CreateTask();
                 var digitalOutWriter = new DigitalMultiChannelWriter(task.Stream);
                 return Observable.Using(
                     () => Disposable.Create(() =>
@@ -62,10 +68,23 @@ namespace Bonsai.DAQmx
                         task.Stop();
                         task.Dispose();
                     }),
-                    resource => source.Do(input =>
-                    {
-                        digitalOutWriter.WriteSingleSampleSingleLine(autoStart: true, new[] { input });
-                    }));
+                    resource => source.Do(input => onNext(digitalOutWriter, input)));
+            });
+        }
+
+        public IObservable<bool> Process(IObservable<bool> source)
+        {
+            return Process(source, (writer, value) =>
+            {
+                writer.WriteSingleSampleSingleLine(autoStart: true, new[] { value });
+            });
+        }
+
+        public IObservable<byte> Process(IObservable<byte> source)
+        {
+            return Process(source, (writer, value) =>
+            {
+                writer.WriteSingleSamplePort(autoStart: true, new[] { value });
             });
         }
 
@@ -73,13 +92,7 @@ namespace Bonsai.DAQmx
         {
             return Observable.Defer(() =>
             {
-                var task = new Task();
-                foreach (var channel in channels)
-                {
-                    task.DOChannels.CreateChannel(channel.Lines, channel.ChannelName, channel.Grouping);
-                }
-
-                task.Control(TaskAction.Verify);
+                var task = CreateTask();
                 task.Timing.ConfigureSampleClock(SignalSource, SampleRate, ActiveEdge, SampleMode, BufferSize);
                 var digitalOutWriter = new DigitalMultiChannelWriter(task.Stream);
                 return Observable.Using(
