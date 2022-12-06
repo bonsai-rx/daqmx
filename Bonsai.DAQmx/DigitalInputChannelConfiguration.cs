@@ -9,7 +9,14 @@ namespace Bonsai.DAQmx
             Lines = string.Empty;
         }
 
-        [TypeConverter(typeof(DigitalOutputPhysicalChannelConverter))]
+        [TypeConverter(typeof(DigitalInputPhysicalChannelConverter))]
         public string Lines { get; set; }
+
+        public override string ToString()
+        {
+            var channelName = !string.IsNullOrEmpty(ChannelName) ? ChannelName : Lines;
+            if (string.IsNullOrEmpty(channelName)) return base.ToString();
+            else return channelName;
+        }
     }
 }
