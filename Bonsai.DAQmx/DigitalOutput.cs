@@ -38,6 +38,7 @@ namespace Bonsai.DAQmx
         [Description("The number of samples to generate, for finite samples, or the size of the buffer for continuous sampling.")]
         public int BufferSize { get; set; }
 
+        [Editor("Bonsai.Design.DescriptiveCollectionEditor, Bonsai.Design", DesignTypes.UITypeEditor)]
         [Description("The collection of digital output channels used to generate digital signals.")]
         public Collection<DigitalOutputChannelConfiguration> Channels
         {

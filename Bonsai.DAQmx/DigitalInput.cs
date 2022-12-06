@@ -41,6 +41,7 @@ namespace Bonsai.DAQmx
         [Description("The size of each read buffer, in samples.")]
         public int SamplesPerRead { get; set; }
 
+        [Editor("Bonsai.Design.DescriptiveCollectionEditor, Bonsai.Design", DesignTypes.UITypeEditor)]
         [Description("The collection of digital input channels from which to acquire logical values.")]
         public Collection<DigitalInputChannelConfiguration> Channels
         {
