@@ -5,9 +5,11 @@ namespace Bonsai.DAQmx
 {
     class AnalogInputPhysicalChannelConverter : StringConverter
     {
-        public override TypeConverter.StandardValuesCollection GetStandardValues(ITypeDescriptorContext context)
+        public override StandardValuesCollection GetStandardValues(ITypeDescriptorContext context)
         {
-            return new StandardValuesCollection(DaqSystem.Local.GetPhysicalChannels(PhysicalChannelTypes.AI, PhysicalChannelAccess.External));
+            return new StandardValuesCollection(DaqSystem.Local.GetPhysicalChannels(
+                PhysicalChannelTypes.AI,
+                PhysicalChannelAccess.External));
         }
 
         public override bool GetStandardValuesSupported(ITypeDescriptorContext context)
