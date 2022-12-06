@@ -11,5 +11,12 @@ namespace Bonsai.DAQmx
 
         [TypeConverter(typeof(DigitalOutputPhysicalChannelConverter))]
         public string Lines { get; set; }
+
+        public override string ToString()
+        {
+            var channelName = !string.IsNullOrEmpty(ChannelName) ? ChannelName : Lines;
+            if (string.IsNullOrEmpty(channelName)) return base.ToString();
+            else return channelName;
+        }
     }
 }
