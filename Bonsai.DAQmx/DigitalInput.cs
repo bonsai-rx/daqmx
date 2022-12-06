@@ -8,6 +8,7 @@ using System.ComponentModel;
 
 namespace Bonsai.DAQmx
 {
+    [DefaultProperty(nameof(Channels))]
     [Description("Generates a sequence of logical values from one or more DAQmx digital input channels.")]
     public class DigitalInput : Source<Mat>
     {

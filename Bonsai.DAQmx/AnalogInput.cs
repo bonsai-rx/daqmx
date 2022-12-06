@@ -8,6 +8,7 @@ using System.ComponentModel;
 
 namespace Bonsai.DAQmx
 {
+    [DefaultProperty(nameof(Channels))]
     [Description("Generates a sequence of voltage measurements from one or more DAQmx analog input channels.")]
     public class AnalogInput : Source<Mat>
     {
