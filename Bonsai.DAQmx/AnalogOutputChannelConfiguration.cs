@@ -5,15 +5,12 @@ namespace Bonsai.DAQmx
 {
     public class AnalogOutputChannelConfiguration : AnalogChannelConfiguration
     {
-        public AnalogOutputChannelConfiguration()
-        {
-            VoltageUnits = AOVoltageUnits.Volts;
-        }
-
         [TypeConverter(typeof(AnalogOutputPhysicalChannelConverter))]
+        [Description("Specifies the name of the physical channel used to create the local virtual channel.")]
         public string PhysicalChannel { get; set; }
 
-        public AOVoltageUnits VoltageUnits { get; set; }
+        [Description("Specifies in what units to generate voltage on the channel.")]
+        public AOVoltageUnits VoltageUnits { get; set; } = AOVoltageUnits.Volts;
 
         public override string ToString()
         {

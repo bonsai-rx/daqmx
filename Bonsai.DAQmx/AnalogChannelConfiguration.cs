@@ -5,17 +5,13 @@ namespace Bonsai.DAQmx
     [TypeConverter(typeof(AnalogChannelConfigurationConverter))]
     public abstract class AnalogChannelConfiguration
     {
-        protected AnalogChannelConfiguration()
-        {
-            ChannelName = string.Empty;
-            MinimumValue = -10;
-            MaximumValue = 10;
-        }
+        [Description("Specifies the name to assign to the local created virtual channel. If not specified, the physical channel name will be used.")]
+        public string ChannelName { get; set; } = string.Empty;
 
-        public string ChannelName { get; set; }
+        [Description("Specifies the minimum value to measure or generate, in the specified voltage units.")]
+        public double MinimumValue { get; set; } = -10;
 
-        public double MinimumValue { get; set; }
-
-        public double MaximumValue { get; set; }
+        [Description("Specifies the maximum value to measure or generate, in the specified voltage units.")]
+        public double MaximumValue { get; set; } = 10;
     }
 }

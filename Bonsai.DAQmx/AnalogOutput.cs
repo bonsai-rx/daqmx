@@ -38,6 +38,7 @@ namespace Bonsai.DAQmx
         [Description("The number of samples to generate, for finite samples, or the size of the buffer for continuous sampling.")]
         public int BufferSize { get; set; }
 
+        [Editor("Bonsai.Design.DescriptiveCollectionEditor, Bonsai.Design", DesignTypes.UITypeEditor)]
         [Description("The collection of analog output channels used to generate voltage.")]
         public Collection<AnalogOutputChannelConfiguration> Channels
         {
@@ -51,7 +52,12 @@ namespace Bonsai.DAQmx
                 var task = new Task();
                 foreach (var channel in channels)
                 {
-                    task.AOChannels.CreateVoltageChannel(channel.PhysicalChannel, channel.ChannelName, channel.MinimumValue, channel.MaximumValue, channel.VoltageUnits);
+                    task.AOChannels.CreateVoltageChannel(
+                        channel.PhysicalChannel,
+                        channel.ChannelName,
+                        channel.MinimumValue,
+                        channel.MaximumValue,
+                        channel.VoltageUnits);
                 }
 
                 task.Control(TaskAction.Verify);

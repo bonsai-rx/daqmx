@@ -4,13 +4,9 @@ namespace Bonsai.DAQmx
 {
     public class DigitalInputChannelConfiguration : DigitalChannelConfiguration
     {
-        public DigitalInputChannelConfiguration()
-        {
-            Lines = string.Empty;
-        }
-
         [TypeConverter(typeof(DigitalInputPhysicalChannelConverter))]
-        public string Lines { get; set; }
+        [Description("Specifies the names of the digital lines or ports to use to create the virtual channel.")]
+        public string Lines { get; set; } = string.Empty;
 
         public override string ToString()
         {

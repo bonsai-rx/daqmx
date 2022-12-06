@@ -41,6 +41,7 @@ namespace Bonsai.DAQmx
         [Description("The size of each read buffer, in samples.")]
         public int SamplesPerRead { get; set; }
 
+        [Editor("Bonsai.Design.DescriptiveCollectionEditor, Bonsai.Design", DesignTypes.UITypeEditor)]
         [Description("The collection of analog input channels from which to acquire voltage samples.")]
         public Collection<AnalogInputChannelConfiguration> Channels
         {
@@ -52,7 +53,13 @@ namespace Bonsai.DAQmx
             var task = new Task();
             foreach (var channel in channels)
             {
-                task.AIChannels.CreateVoltageChannel(channel.PhysicalChannel, channel.ChannelName, channel.TerminalConfiguration, channel.MinimumValue, channel.MaximumValue, channel.VoltageUnits);
+                task.AIChannels.CreateVoltageChannel(
+                    channel.PhysicalChannel,
+                    channel.ChannelName,
+                    channel.TerminalConfiguration,
+                    channel.MinimumValue,
+                    channel.MaximumValue,
+                    channel.VoltageUnits);
             }
 
             return task;
