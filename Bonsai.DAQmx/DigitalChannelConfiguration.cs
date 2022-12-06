@@ -3,7 +3,7 @@ using System.ComponentModel;
 
 namespace Bonsai.DAQmx
 {
-    [TypeConverter(typeof(AnalogChannelConfigurationConverter))]
+    [TypeConverter(typeof(DigitalChannelConfigurationConverter))]
     public abstract class DigitalChannelConfiguration
     {
         protected DigitalChannelConfiguration()
