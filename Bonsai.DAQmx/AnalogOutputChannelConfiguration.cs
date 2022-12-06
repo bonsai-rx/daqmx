@@ -18,8 +18,7 @@ namespace Bonsai.DAQmx
         public override string ToString()
         {
             var channelName = !string.IsNullOrEmpty(ChannelName) ? ChannelName : PhysicalChannel;
-            if (string.IsNullOrEmpty(channelName)) return base.ToString();
-            else return channelName;
+            return string.IsNullOrEmpty(channelName) ? GetType().Name : channelName;
         }
     }
 }
