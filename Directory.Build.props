@@ -7,9 +7,12 @@
     <PackageProjectUrl>https://github.com/bonsai-rx/daqmx</PackageProjectUrl>
     <PackageLicenseUrl>https://bonsai-rx.org/license</PackageLicenseUrl>
     <PackageIconUrl>https://bonsai-rx.org/assets/images/bonsai.png</PackageIconUrl>
+    <PackageOutputPath>..\bin\$(Configuration)</PackageOutputPath>
     <IncludeSymbols Condition="'$(Configuration)'=='Release'">true</IncludeSymbols>
     <GeneratePackageOnBuild Condition="'$(Configuration)'=='Release'">true</GeneratePackageOnBuild>
-    <PackageOutputPath>..\bin\$(Configuration)</PackageOutputPath>
+    <GenerateDocumentationFile Condition="'$(Configuration)'=='Release'">true</GenerateDocumentationFile>
+    <RepositoryUrl>https://github.com/bonsai-rx/daqmx.git</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
     <VersionSuffix></VersionSuffix>
     <Features>strict</Features>
   </PropertyGroup>
