@@ -9,37 +9,55 @@ using System.Runtime.InteropServices;
 
 namespace Bonsai.DAQmx
 {
+    /// <summary>
+    /// Represents an operator that writes logical values to one or more DAQmx digital
+    /// output lines from a sequence of sample buffers.
+    /// </summary>
     [DefaultProperty(nameof(Channels))]
-    [Description("Writes a sequence of logical values to one or more DAQmx digital output channels.")]
+    [Description("Writes logical values to one or more DAQmx digital output lines from a sequence of sample buffers.")]
     public class DigitalOutput : Sink<Mat>
     {
         readonly Collection<DigitalOutputChannelConfiguration> channels = new Collection<DigitalOutputChannelConfiguration>();
 
-        public DigitalOutput()
-        {
-            BufferSize = 1000;
-            SignalSource = string.Empty;
-            ActiveEdge = SampleClockActiveEdge.Rising;
-            SampleMode = SampleQuantityMode.ContinuousSamples;
-        }
-
+        /// <summary>
+        /// Gets or sets the optional source terminal of the clock. If not specified,
+        /// the internal clock of the device will be used.
+        /// </summary>
         [Description("The optional source terminal of the clock. If not specified, the internal clock of the device will be used.")]
-        public string SignalSource { get; set; }
+        public string SignalSource { get; set; } = string.Empty;
 
-        [Description("The sampling rate, in samples per second.")]
+        /// <summary>
+        /// Gets or sets the sampling rate for writing logical values, in samples
+        /// per second.
+        /// </summary>
         public double SampleRate { get; set; }
 
-        [Description("The edges of sample clock pulses on which to generate samples.")]
-        public SampleClockActiveEdge ActiveEdge { get; set; }
+        /// <summary>
+        /// Gets or sets a value specifying on which edge of a clock pulse sampling takes place.
+        /// </summary>
+        [Description("Specifies on which edge of a clock pulse sampling takes place.")]
+        public SampleClockActiveEdge ActiveEdge { get; set; } = SampleClockActiveEdge.Rising;
 
-        [Description("Specifies whether signal generation is finite, or continuous.")]
-        public SampleQuantityMode SampleMode { get; set; }
+        /// <summary>
+        /// Gets or sets a value specifying whether the writer task will generate
+        /// a finite number of samples or if it continuously generates samples.
+        /// </summary>
+        [Description("Specifies whether the writer task will generate a finite number of samples or if it continuously generates samples.")]
+        public SampleQuantityMode SampleMode { get; set; } = SampleQuantityMode.ContinuousSamples;
 
-        [Description("The number of samples to generate, for finite samples, or the size of the buffer for continuous sampling.")]
-        public int BufferSize { get; set; }
+        /// <summary>
+        /// Gets or sets the number of samples to generate, for finite samples, or the
+        /// size of the buffer for continuous samples.
+        /// </summary>
+        [Description("The number of samples to generate, for finite samples, or the size of the buffer for continuous samples.")]
+        public int BufferSize { get; set; } = 1000;
 
+        /// <summary>
+        /// Gets the collection of virtual output channels on which to write the
+        /// logical values.
+        /// </summary>
         [Editor("Bonsai.Design.DescriptiveCollectionEditor, Bonsai.Design", DesignTypes.UITypeEditor)]
-        [Description("The collection of digital output channels used to generate digital signals.")]
+        [Description("The collection of virtual output channels on which to write the logical values.")]
         public Collection<DigitalOutputChannelConfiguration> Channels
         {
             get { return channels; }
@@ -78,6 +96,19 @@ namespace Bonsai.DAQmx
             });
         }
 
+        /// <summary>
+        /// Writes an observable sequence of logical values to one or more DAQmx
+        /// digital output lines.
+        /// </summary>
+        /// <param name="source">
+        /// A sequence of boolean values representing the logical levels to write
+        /// to one or more DAQmx digital output lines.
+        /// </param>
+        /// <returns>
+        /// An observable sequence that is identical to the <paramref name="source"/>
+        /// sequence but where there is an additional side effect of writing logical
+        /// values to one or more DAQmx digital output lines.
+        /// </returns>
         public IObservable<bool> Process(IObservable<bool> source)
         {
             return Process(source, (writer, value) =>
@@ -86,6 +117,19 @@ namespace Bonsai.DAQmx
             });
         }
 
+        /// <summary>
+        /// Writes an observable sequence of logical values to one or more DAQmx
+        /// digital output lines.
+        /// </summary>
+        /// <param name="source">
+        /// A sequence of 8-bit unsigned integers representing the state of digital
+        /// output lines in a local virtual port channel.
+        /// </param>
+        /// <returns>
+        /// An observable sequence that is identical to the <paramref name="source"/>
+        /// sequence but where there is an additional side effect of writing logical
+        /// values to one or more DAQmx digital output lines.
+        /// </returns>
         public IObservable<byte> Process(IObservable<byte> source)
         {
             return Process(source, (writer, value) =>
@@ -94,6 +138,24 @@ namespace Bonsai.DAQmx
             });
         }
 
+        /// <summary>
+        /// Writes logical values to one or more DAQmx digital output lines
+        /// from an observable sequence of sample buffers.
+        /// </summary>
+        /// <param name="source">
+        /// A sequence of 2D <see cref="Mat"/> objects storing the logical values.
+        /// Each row corresponds to a channel in the acquisition task, and each column
+        /// to a sample from each of the channels. The order of the channels follows
+        /// the order in which you specify the channels in the <see cref="Channels"/>
+        /// property. Each sample can represent either a single line or a bitmask
+        /// representing the state of all digital lines in a single port, depending
+        /// on the configuration of the virtual channel.
+        /// </param>
+        /// <returns>
+        /// An observable sequence that is identical to the <paramref name="source"/>
+        /// sequence but where there is an additional side effect of writing logical
+        /// values to one or more DAQmx digital output lines.
+        /// </returns>
         public override IObservable<Mat> Process(IObservable<Mat> source)
         {
             return Observable.Defer(() =>
