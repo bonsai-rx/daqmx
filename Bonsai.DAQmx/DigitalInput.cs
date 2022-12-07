@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Reactive.Linq;
 using OpenCV.Net;
 using NationalInstruments.DAQmx;
@@ -38,8 +38,8 @@ namespace Bonsai.DAQmx
         [Description("The number of samples to acquire, for finite samples, or the size of the buffer for continuous sampling.")]
         public int BufferSize { get; set; }
 
-        [Description("The size of each read buffer, in samples.")]
-        public int SamplesPerRead { get; set; }
+        [Description("The number of samples in each output buffer. If not specified, the number of samples will be set to the size of the buffer.")]
+        public int? SamplesPerChannel { get; set; }
 
         [Editor("Bonsai.Design.DescriptiveCollectionEditor, Bonsai.Design", DesignTypes.UITypeEditor)]
         [Description("The collection of digital input channels from which to acquire logical values.")]
@@ -64,10 +64,11 @@ namespace Bonsai.DAQmx
             return Observable.Create<Mat>(observer =>
             {
                 var task = CreateTask();
-                task.Timing.ConfigureSampleClock(SignalSource, SampleRate, ActiveEdge, SampleMode, BufferSize);
+                var bufferSize = BufferSize;
+                task.Timing.ConfigureSampleClock(SignalSource, SampleRate, ActiveEdge, SampleMode, bufferSize);
                 task.Control(TaskAction.Verify);
                 var digitalInReader = new DigitalMultiChannelReader(task.Stream);
-                var samplesPerChannel = SamplesPerRead < 0 ? BufferSize : SamplesPerRead;
+                var samplesPerChannel = SamplesPerChannel.GetValueOrDefault(bufferSize);
                 AsyncCallback digitalCallback = null;
                 digitalCallback = new AsyncCallback(result =>
                 {
@@ -92,14 +93,15 @@ namespace Bonsai.DAQmx
             return Observable.Defer(() =>
             {
                 var task = CreateTask();
+                var bufferSize = BufferSize;
                 var sampleRate = SampleRate;
                 if (sampleRate > 0)
                 {
-                    task.Timing.ConfigureSampleClock(SignalSource, sampleRate, ActiveEdge, SampleMode, BufferSize);
+                    task.Timing.ConfigureSampleClock(SignalSource, sampleRate, ActiveEdge, SampleMode, bufferSize);
                 }
                 task.Control(TaskAction.Verify);
                 var digitalInReader = new DigitalMultiChannelReader(task.Stream);
-                var samplesPerChannel = SamplesPerRead < 0 ? BufferSize : SamplesPerRead;
+                var samplesPerChannel = SamplesPerChannel.GetValueOrDefault(bufferSize);
                 return Observable.Using(() => Disposable.Create(
                     () =>
                     {
