@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Reactive.Linq;
 using OpenCV.Net;
 using NationalInstruments.DAQmx;
@@ -70,7 +70,7 @@ namespace Bonsai.DAQmx
                     }),
                     resource => source.Do(input =>
                     {
-                        analogOutWriter.WriteSingleSample(true, new[] { input });
+                        analogOutWriter.WriteSingleSample(autoStart: true, new[] { input });
                     }));
             });
         }
@@ -107,7 +107,7 @@ namespace Bonsai.DAQmx
                             var dataHeader = new Mat(input.Rows, input.Cols, Depth.F64, 1, dataHandle.AddrOfPinnedObject());
                             if (input.Depth != dataHeader.Depth) CV.Convert(input, dataHeader);
                             else CV.Copy(input, dataHeader);
-                            analogOutWriter.WriteMultiSample(true, data);
+                            analogOutWriter.WriteMultiSample(autoStart: true, data);
                         }
                         finally { dataHandle.Free(); }
                     }));
