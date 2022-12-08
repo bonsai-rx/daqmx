@@ -112,8 +112,8 @@ namespace Bonsai.DAQmx
         /// </summary>
         /// <param name="source">
         /// A sequence of 2D <see cref="Mat"/> objects storing the voltage samples.
-        /// Each row corresponds to one of the channels in the acquisition task, and
-        /// each column to a sample from each of the channels. The order of the
+        /// Each row corresponds to one of the channels in the signal generation task,
+        /// and each column to a sample from each of the channels. The order of the
         /// channels follows the order in which you specify the channels in the
         /// <see cref="Channels"/> property.
         /// </param>

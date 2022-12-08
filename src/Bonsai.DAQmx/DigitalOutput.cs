@@ -144,8 +144,8 @@ namespace Bonsai.DAQmx
         /// </summary>
         /// <param name="source">
         /// A sequence of 2D <see cref="Mat"/> objects storing the logical values.
-        /// Each row corresponds to a channel in the acquisition task, and each column
-        /// to a sample from each of the channels. The order of the channels follows
+        /// Each row corresponds to a channel in the signal generation task, and each
+        /// column to a sample from each of the channels. The order of the channels follows
         /// the order in which you specify the channels in the <see cref="Channels"/>
         /// property. Each sample can represent either a single line or a bitmask
         /// representing the state of all digital lines in a single port, depending
