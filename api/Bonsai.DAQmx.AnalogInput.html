@@ -1,0 +1,512 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class AnalogInput
+   </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class AnalogInput
+   ">
+    <meta name="generator" content="docfx 2.59.4.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    <meta property="docfx:newtab" content="true">
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first="First" data-prev="Previous" data-next="Next" data-last="Last"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Bonsai.DAQmx.AnalogInput">
+  
+  
+  <h1 id="Bonsai_DAQmx_AnalogInput" data-uid="Bonsai.DAQmx.AnalogInput" class="text-break">Class AnalogInput
+  </h1>
+  <div class="markdown level0 summary"><p>Represents an operator that generates a sequence of voltage measurements
+from one or more DAQmx analog input channels.</p>
+</div>
+  <div class="markdown level0 conceptual"><p><a class="xref" href="Bonsai.DAQmx.AnalogInput.html"><code>AnalogInput</code></a> configures and starts a data acquisition task for sampling voltage measurements from one or more physical analog input channels. Samples from each channel will be collected in a sample buffer, where each row corresponds to a channel in the acquisition task, and each column to a sample from each of the channels. The order of the channels follows the order in which you specify the channels in the <a class="xref" href="Bonsai.DAQmx.AnalogInput.html#Bonsai_DAQmx_AnalogInput_Channels"><code>Channels</code></a> property.</p>
+<p>If no input source is specified, data will be collected asynchronously every time a new buffer is filled.</p>
+<div class="workflow"><p><img src="../workflows/AnalogInput-Async.bonsai" alt="AnalogInput-Async"></p>
+</div>
+<p>Alternatively, if an input observable sequence is provided, a new data buffer will be collected every time a new notification is emitted by the input source.</p>
+<div class="workflow"><p><img src="../workflows/AnalogInput-Sync.bonsai" alt="AnalogInput-Sync"></p>
+</div>
+</div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">Object</a></div>
+    <div class="level1"><a class="xref" href="https://bonsai-rx.org/docs/api/Bonsai.Source-1.html">Source</a>&lt;<a class="xref" href="https://horizongir.github.io/opencv.net/api/OpenCV.Net.Mat.html">Mat</a>&gt;</div>
+    <div class="level2"><span class="xref">AnalogInput</span></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring#system-object-tostring">Object.ToString()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">Object.Equals(Object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">Object.Equals(Object, Object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals#system-object-referenceequals(system-object-system-object)">Object.ReferenceEquals(Object, Object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode#system-object-gethashcode">Object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype#system-object-gettype">Object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone#system-object-memberwiseclone">Object.MemberwiseClone()</a>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Bonsai.DAQmx.html">Bonsai.DAQmx</a></h6>
+  <h6><strong>Assembly</strong>: Bonsai.DAQmx.dll</h6>
+  <h5 id="Bonsai_DAQmx_AnalogInput_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class AnalogInput : Source&lt;Mat&gt;</code></pre>
+  </div>
+  <h3 id="properties">Properties
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/bonsai-rx/daqmx/new/main/docs/apidoc/new?filename=Bonsai_DAQmx_AnalogInput_ActiveEdge.md&amp;value=---%0Auid%3A%20Bonsai.DAQmx.AnalogInput.ActiveEdge%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/bonsai-rx/daqmx/blob/main/src/Bonsai.DAQmx/AnalogInput.cs/#L38">View Source</a>
+  </span>
+  <a id="Bonsai_DAQmx_AnalogInput_ActiveEdge_" data-uid="Bonsai.DAQmx.AnalogInput.ActiveEdge*"></a>
+  <h4 id="Bonsai_DAQmx_AnalogInput_ActiveEdge" data-uid="Bonsai.DAQmx.AnalogInput.ActiveEdge">ActiveEdge</h4>
+  <div class="markdown level1 summary"><p>Gets or sets a value specifying on which edge of a clock pulse sampling takes place.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SampleClockActiveEdge ActiveEdge { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">NationalInstruments.DAQmx.SampleClockActiveEdge</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/bonsai-rx/daqmx/new/main/docs/apidoc/new?filename=Bonsai_DAQmx_AnalogInput_BufferSize.md&amp;value=---%0Auid%3A%20Bonsai.DAQmx.AnalogInput.BufferSize%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/bonsai-rx/daqmx/blob/main/src/Bonsai.DAQmx/AnalogInput.cs/#L52">View Source</a>
+  </span>
+  <a id="Bonsai_DAQmx_AnalogInput_BufferSize_" data-uid="Bonsai.DAQmx.AnalogInput.BufferSize*"></a>
+  <h4 id="Bonsai_DAQmx_AnalogInput_BufferSize" data-uid="Bonsai.DAQmx.AnalogInput.BufferSize">BufferSize</h4>
+  <div class="markdown level1 summary"><p>Gets or sets the number of samples to acquire, for finite samples, or the
+size of the buffer for continuous sampling.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int BufferSize { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">Int32</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/bonsai-rx/daqmx/new/main/docs/apidoc/new?filename=Bonsai_DAQmx_AnalogInput_Channels.md&amp;value=---%0Auid%3A%20Bonsai.DAQmx.AnalogInput.Channels%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/bonsai-rx/daqmx/blob/main/src/Bonsai.DAQmx/AnalogInput.cs/#L65">View Source</a>
+  </span>
+  <a id="Bonsai_DAQmx_AnalogInput_Channels_" data-uid="Bonsai.DAQmx.AnalogInput.Channels*"></a>
+  <h4 id="Bonsai_DAQmx_AnalogInput_Channels" data-uid="Bonsai.DAQmx.AnalogInput.Channels">Channels</h4>
+  <div class="markdown level1 summary"><p>Gets the collection of analog input channels from which to acquire voltage samples.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Collection&lt;AnalogInputChannelConfiguration&gt; Channels { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.collection-1">Collection</a>&lt;<a class="xref" href="Bonsai.DAQmx.AnalogInputChannelConfiguration.html">AnalogInputChannelConfiguration</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/bonsai-rx/daqmx/new/main/docs/apidoc/new?filename=Bonsai_DAQmx_AnalogInput_SampleMode.md&amp;value=---%0Auid%3A%20Bonsai.DAQmx.AnalogInput.SampleMode%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/bonsai-rx/daqmx/blob/main/src/Bonsai.DAQmx/AnalogInput.cs/#L45">View Source</a>
+  </span>
+  <a id="Bonsai_DAQmx_AnalogInput_SampleMode_" data-uid="Bonsai.DAQmx.AnalogInput.SampleMode*"></a>
+  <h4 id="Bonsai_DAQmx_AnalogInput_SampleMode" data-uid="Bonsai.DAQmx.AnalogInput.SampleMode">SampleMode</h4>
+  <div class="markdown level1 summary"><p>Gets or sets a value specifying whether the acquisition task will acquire
+a finite number of samples or if it continuously acquires samples.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SampleQuantityMode SampleMode { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">NationalInstruments.DAQmx.SampleQuantityMode</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/bonsai-rx/daqmx/new/main/docs/apidoc/new?filename=Bonsai_DAQmx_AnalogInput_SampleRate.md&amp;value=---%0Auid%3A%20Bonsai.DAQmx.AnalogInput.SampleRate%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/bonsai-rx/daqmx/blob/main/src/Bonsai.DAQmx/AnalogInput.cs/#L32">View Source</a>
+  </span>
+  <a id="Bonsai_DAQmx_AnalogInput_SampleRate_" data-uid="Bonsai.DAQmx.AnalogInput.SampleRate*"></a>
+  <h4 id="Bonsai_DAQmx_AnalogInput_SampleRate" data-uid="Bonsai.DAQmx.AnalogInput.SampleRate">SampleRate</h4>
+  <div class="markdown level1 summary"><p>Gets or sets the sampling rate for acquiring voltage measurements, in
+samples per second.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public double SampleRate { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">Double</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/bonsai-rx/daqmx/new/main/docs/apidoc/new?filename=Bonsai_DAQmx_AnalogInput_SamplesPerChannel.md&amp;value=---%0Auid%3A%20Bonsai.DAQmx.AnalogInput.SamplesPerChannel%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/bonsai-rx/daqmx/blob/main/src/Bonsai.DAQmx/AnalogInput.cs/#L59">View Source</a>
+  </span>
+  <a id="Bonsai_DAQmx_AnalogInput_SamplesPerChannel_" data-uid="Bonsai.DAQmx.AnalogInput.SamplesPerChannel*"></a>
+  <h4 id="Bonsai_DAQmx_AnalogInput_SamplesPerChannel" data-uid="Bonsai.DAQmx.AnalogInput.SamplesPerChannel">SamplesPerChannel</h4>
+  <div class="markdown level1 summary"><p>Gets or sets the number of samples per channel in each output buffer.
+If not specified, the number of samples will be set to the size of the buffer.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int? SamplesPerChannel { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.nullable-1">Nullable</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">Int32</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/bonsai-rx/daqmx/new/main/docs/apidoc/new?filename=Bonsai_DAQmx_AnalogInput_SignalSource.md&amp;value=---%0Auid%3A%20Bonsai.DAQmx.AnalogInput.SignalSource%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/bonsai-rx/daqmx/blob/main/src/Bonsai.DAQmx/AnalogInput.cs/#L25">View Source</a>
+  </span>
+  <a id="Bonsai_DAQmx_AnalogInput_SignalSource_" data-uid="Bonsai.DAQmx.AnalogInput.SignalSource*"></a>
+  <h4 id="Bonsai_DAQmx_AnalogInput_SignalSource" data-uid="Bonsai.DAQmx.AnalogInput.SignalSource">SignalSource</h4>
+  <div class="markdown level1 summary"><p>Gets or sets the optional source terminal of the clock. If not specified,
+the internal clock of the device will be used.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string SignalSource { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/bonsai-rx/daqmx/new/main/docs/apidoc/new?filename=Bonsai_DAQmx_AnalogInput_Generate.md&amp;value=---%0Auid%3A%20Bonsai.DAQmx.AnalogInput.Generate%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/bonsai-rx/daqmx/blob/main/src/Bonsai.DAQmx/AnalogInput.cs/#L100">View Source</a>
+  </span>
+  <a id="Bonsai_DAQmx_AnalogInput_Generate_" data-uid="Bonsai.DAQmx.AnalogInput.Generate*"></a>
+  <h4 id="Bonsai_DAQmx_AnalogInput_Generate" data-uid="Bonsai.DAQmx.AnalogInput.Generate">Generate()</h4>
+  <div class="markdown level1 summary"><p>Generates an observable sequence of voltage measurements from one or
+more DAQmx analog input channels.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override IObservable&lt;Mat&gt; Generate()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.iobservable-1">IObservable</a>&lt;<a class="xref" href="https://horizongir.github.io/opencv.net/api/OpenCV.Net.Mat.html">Mat</a>&gt;</td>
+        <td><p>A sequence of 2D <a class="xref" href="https://horizongir.github.io/opencv.net/api/OpenCV.Net.Mat.html">Mat</a> objects storing the voltage samples.
+Each row corresponds to a channel in the acquisition task, and each column
+to a sample from each of the channels. The order of the channels follows
+the order in which you specify the channels in the <a class="xref" href="Bonsai.DAQmx.AnalogInput.html#Bonsai_DAQmx_AnalogInput_Channels">Channels</a>
+property.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">Bonsai.Source&lt;OpenCV.Net.Mat&gt;.Generate()</span></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/bonsai-rx/daqmx/new/main/docs/apidoc/new?filename=Bonsai_DAQmx_AnalogInput_Generate__1_System_IObservable___0__.md&amp;value=---%0Auid%3A%20Bonsai.DAQmx.AnalogInput.Generate%60%601(System.IObservable%7B%60%600%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/bonsai-rx/daqmx/blob/main/src/Bonsai.DAQmx/AnalogInput.cs/#L147">View Source</a>
+  </span>
+  <a id="Bonsai_DAQmx_AnalogInput_Generate_" data-uid="Bonsai.DAQmx.AnalogInput.Generate*"></a>
+  <h4 id="Bonsai_DAQmx_AnalogInput_Generate__1_System_IObservable___0__" data-uid="Bonsai.DAQmx.AnalogInput.Generate``1(System.IObservable{``0})">Generate&lt;TSource&gt;(IObservable&lt;TSource&gt;)</h4>
+  <div class="markdown level1 summary"><p>Generates an observable sequence of voltage measurements from one or
+more DAQmx analog input channels, where each new buffer is emitted only
+when an observable sequence emits a notification.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IObservable&lt;Mat&gt; Generate&lt;TSource&gt;(IObservable&lt;TSource&gt; source)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.iobservable-1">IObservable</a>&lt;TSource&gt;</td>
+        <td><span class="parametername">source</span></td>
+        <td><p>The sequence containing the notifications used for emitting sample buffers.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.iobservable-1">IObservable</a>&lt;<a class="xref" href="https://horizongir.github.io/opencv.net/api/OpenCV.Net.Mat.html">Mat</a>&gt;</td>
+        <td><p>A sequence of 2D <a class="xref" href="https://horizongir.github.io/opencv.net/api/OpenCV.Net.Mat.html">Mat</a> objects storing the voltage samples.
+Each row corresponds to a channel in the acquisition task, and each column
+to a sample from each of the channels. The order of the channels follows
+the order in which you specify the channels in the <a class="xref" href="Bonsai.DAQmx.AnalogInput.html#Bonsai_DAQmx_AnalogInput_Channels">Channels</a>
+property.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TSource</span></td>
+        <td><p>The type of the elements in the <code data-dev-comment-type="paramref" class="paramref">source</code> sequence.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/bonsai-rx/daqmx/blob/main/docs/apidoc/Bonsai_DAQmx_AnalogInput.md/#L2" class="contribution-link">Improve this Doc</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/bonsai-rx/daqmx/blob/main/src/Bonsai.DAQmx/AnalogInput.cs/#L15" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

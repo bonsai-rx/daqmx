@@ -1,0 +1,161 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>How to use </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="How to use ">
+    <meta name="generator" content="docfx 2.59.4.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    <meta property="docfx:newtab" content="true">
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first="First" data-prev="Previous" data-next="Next" data-last="Last"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="how-to-use">How to use</h1>
+
+<p><code>Bonsai.DAQmx</code> provides an interface for data acquisition and signal generation on NI hardware using four distinct operators.</p>
+<p>In order to use any of the operators, you need to specify a collection of physical channels used to acquire or generate signals using the <code>Channels</code> property. Depending on whether you are working with analog or digital signals the properties used to configure physical channels are slightly different. Channels can be automatically enumerated by the visual interface as long as you have the device correctly plugged and configured in the host computer.</p>
+<p>Working examples for each of these operators can be found in the extended description for each operator, which we cover below.</p>
+<h2 id="analoginput">AnalogInput</h2>
+<p><a class="xref" href="../api/Bonsai.DAQmx.AnalogInput.html"><code>AnalogInput</code></a> configures and starts a data acquisition task for sampling voltage measurements from one or more physical analog input channels. Samples from each channel will be collected in a sample buffer, where each row corresponds to a channel in the acquisition task, and each column to a sample from each of the channels. The order of the channels follows the order in which you specify the channels in the <a class="xref" href="../api/Bonsai.DAQmx.AnalogInput.html#Bonsai_DAQmx_AnalogInput_Channels"><code>Channels</code></a> property.</p>
+<p>If no input source is specified, data will be collected asynchronously every time a new buffer is filled.</p>
+<div class="workflow"><p><img src="../workflows/AnalogInput-Async.bonsai" alt="AnalogInput-Async"></p>
+</div>
+<p>Alternatively, if an input observable sequence is provided, a new data buffer will be collected every time a new notification is emitted by the input source.</p>
+<div class="workflow"><p><img src="../workflows/AnalogInput-Sync.bonsai" alt="AnalogInput-Sync"></p>
+</div>
+<h2 id="analogoutput">AnalogOutput</h2>
+<p><a class="xref" href="../api/Bonsai.DAQmx.AnalogOutput.html"><code>AnalogOutput</code></a> configures and starts a task for generating voltage signals in one or more physical analog output channels. Voltage samples for each channel are read from sample buffers in the source sequence, where each row corresponds to one of the channels in the signal generation task, and each column to a sample from each of the channels. The order of the channels follows the order in which you specify the channels in the <a class="xref" href="../api/Bonsai.DAQmx.AnalogOutput.html#Bonsai_DAQmx_AnalogOutput_Channels"><code>Channels</code></a> property.</p>
+<p>Signals can be generated continuously, where a ring buffer is constanty updated with new data arriving from the source sequence.</p>
+<div class="workflow"><p><img src="../workflows/AnalogOutput-Continuous.bonsai" alt="AnalogOutput-Continuous"></p>
+</div>
+<p>Alternatively, signals can also be generated with a finite number of samples, in which case the input buffers will provide samples until the specified buffer size is reached. In this case, the operator will wait for the task to finish generating the specified number of samples.</p>
+<div class="workflow"><p><img src="../workflows/AnalogOutput-Finite.bonsai" alt="AnalogOutput-Finite"></p>
+</div>
+<h2 id="digitalinput">DigitalInput</h2>
+<p><a class="xref" href="../api/Bonsai.DAQmx.DigitalInput.html"><code>DigitalInput</code></a> configures and starts a data acquisition task for sampling logical values from one or more digital input lines. Logical values will be collected in a sample buffer, where each sample can represent either a single line or a bitmask representing the state of all digital lines in a single port, depending on the configuration of the virtual channel. Each row corresponds to a channel in the acquisition task, and each column to a sample from each of the channels. The order of the channels in the sample buffer follows the order in which you specify the channels in the <a class="xref" href="../api/Bonsai.DAQmx.DigitalInput.html#Bonsai_DAQmx_DigitalInput_Channels"><code>Channels</code></a> property.</p>
+<p>Digital lines can be grouped as a port when creating the local virtual channel, either by specifying a range of lines (e.g. <code>Dev1/port0/line0:3</code>) or by specifying an entire port at once (e.g. <code>Dev1/port0</code>).</p>
+<p>If no input source is specified, samples will be collected asynchronously every time a new buffer is filled.</p>
+<div class="workflow"><p><img src="../workflows/DigitalInput-Async.bonsai" alt="DigitalInput-Async"></p>
+</div>
+<p>Alternatively, if an input observable sequence is provided, a new sample buffer will be collected every time a new notification is emitted by the input source.</p>
+<div class="workflow"><p><img src="../workflows/DigitalInput-Sync.bonsai" alt="DigitalInput-Sync"></p>
+</div>
+<h2 id="digitaloutput">DigitalOutput</h2>
+<p><a class="xref" href="../api/Bonsai.DAQmx.DigitalOutput.html"><code>DigitalOutput</code></a> configures and starts a task for writing logical values to one or more digital output lines. Logical values for each line are read from sample buffers in the source sequence, where each row corresponds to one of the channels in the signal generation task, and each column to a sample from each of the channels. The order of the channels follows the order in which you specify the channels in the <a class="xref" href="../api/Bonsai.DAQmx.DigitalOutput.html#Bonsai_DAQmx_DigitalOutput_Channels"><code>Channels</code></a> property.</p>
+<p>Each logical value sample can represent either a single line or a bitmask representing the state of all digital lines in a single port, depending on the configuration of the virtual channel. Digital lines can be grouped as a port when creating the local virtual channel, either by specifying a range of lines (e.g. <code>Dev1/port0/line0:3</code>) or by specifying an entire port at once (e.g. <code>Dev1/port0</code>).</p>
+<p>Signals can be generated continuously, where a ring buffer is constanty updated with new data arriving from the source sequence.</p>
+<div class="workflow"><p><img src="../workflows/DigitalOutput-Continuous.bonsai" alt="DigitalOutput-Continuous"></p>
+</div>
+<p>Logical values can also be provided by a source of integers specifying a bitmask with the state of all digital lines in a single port.</p>
+<div class="workflow"><p><img src="../workflows/DigitalOutput-ContinuousSingleSample.bonsai" alt="DigitalOutput-ContinuousSingleSample"></p>
+</div>
+<p>Alternatively, signals can also be generated with a finite number of samples, in which case the input buffers will provide samples until the specified buffer size is reached. In this case, the operator will wait for the task to finish generating the specified number of samples.</p>
+<div class="workflow"><p><img src="../workflows/DigitalOutput-Finite.bonsai" alt="DigitalOutput-Finite"></p>
+</div>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/bonsai-rx/daqmx/blob/main/docs/articles/manual.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

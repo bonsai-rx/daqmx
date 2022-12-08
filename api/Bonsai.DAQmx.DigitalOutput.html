@@ -1,0 +1,547 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class DigitalOutput
+   </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class DigitalOutput
+   ">
+    <meta name="generator" content="docfx 2.59.4.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    <meta property="docfx:newtab" content="true">
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first="First" data-prev="Previous" data-next="Next" data-last="Last"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Bonsai.DAQmx.DigitalOutput">
+  
+  
+  <h1 id="Bonsai_DAQmx_DigitalOutput" data-uid="Bonsai.DAQmx.DigitalOutput" class="text-break">Class DigitalOutput
+  </h1>
+  <div class="markdown level0 summary"><p>Represents an operator that writes logical values to one or more DAQmx digital
+output lines from a sequence of sample buffers.</p>
+</div>
+  <div class="markdown level0 conceptual"><p><a class="xref" href="Bonsai.DAQmx.DigitalOutput.html"><code>DigitalOutput</code></a> configures and starts a task for writing logical values to one or more digital output lines. Logical values for each line are read from sample buffers in the source sequence, where each row corresponds to one of the channels in the signal generation task, and each column to a sample from each of the channels. The order of the channels follows the order in which you specify the channels in the <a class="xref" href="Bonsai.DAQmx.DigitalOutput.html#Bonsai_DAQmx_DigitalOutput_Channels"><code>Channels</code></a> property.</p>
+<p>Each logical value sample can represent either a single line or a bitmask representing the state of all digital lines in a single port, depending on the configuration of the virtual channel. Digital lines can be grouped as a port when creating the local virtual channel, either by specifying a range of lines (e.g. <code>Dev1/port0/line0:3</code>) or by specifying an entire port at once (e.g. <code>Dev1/port0</code>).</p>
+<p>Signals can be generated continuously, where a ring buffer is constanty updated with new data arriving from the source sequence.</p>
+<div class="workflow"><p><img src="../workflows/DigitalOutput-Continuous.bonsai" alt="DigitalOutput-Continuous"></p>
+</div>
+<p>Logical values can also be provided by a source of integers specifying a bitmask with the state of all digital lines in a single port.</p>
+<div class="workflow"><p><img src="../workflows/DigitalOutput-ContinuousSingleSample.bonsai" alt="DigitalOutput-ContinuousSingleSample"></p>
+</div>
+<p>Alternatively, signals can also be generated with a finite number of samples, in which case the input buffers will provide samples until the specified buffer size is reached. In this case, the operator will wait for the task to finish generating the specified number of samples.</p>
+<div class="workflow"><p><img src="../workflows/DigitalOutput-Finite.bonsai" alt="DigitalOutput-Finite"></p>
+</div>
+</div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">Object</a></div>
+    <div class="level1"><a class="xref" href="https://bonsai-rx.org/docs/api/Bonsai.Combinator-2.html">Combinator</a>&lt;<a class="xref" href="https://horizongir.github.io/opencv.net/api/OpenCV.Net.Mat.html">Mat</a>, <a class="xref" href="https://horizongir.github.io/opencv.net/api/OpenCV.Net.Mat.html">Mat</a>&gt;</div>
+    <div class="level2"><a class="xref" href="https://bonsai-rx.org/docs/api/Bonsai.Sink-1.html">Sink</a>&lt;<a class="xref" href="https://horizongir.github.io/opencv.net/api/OpenCV.Net.Mat.html">Mat</a>&gt;</div>
+    <div class="level3"><span class="xref">DigitalOutput</span></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="https://bonsai-rx.org/docs/api/Bonsai.Combinator-2.html#Bonsai_Combinator_2_Process_System_IObservable__0__">Combinator&lt;Mat, Mat&gt;.Process(IObservable&lt;Mat&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring#system-object-tostring">Object.ToString()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">Object.Equals(Object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">Object.Equals(Object, Object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals#system-object-referenceequals(system-object-system-object)">Object.ReferenceEquals(Object, Object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode#system-object-gethashcode">Object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype#system-object-gettype">Object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone#system-object-memberwiseclone">Object.MemberwiseClone()</a>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Bonsai.DAQmx.html">Bonsai.DAQmx</a></h6>
+  <h6><strong>Assembly</strong>: Bonsai.DAQmx.dll</h6>
+  <h5 id="Bonsai_DAQmx_DigitalOutput_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class DigitalOutput : Sink&lt;Mat&gt;</code></pre>
+  </div>
+  <h3 id="properties">Properties
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/bonsai-rx/daqmx/new/main/docs/apidoc/new?filename=Bonsai_DAQmx_DigitalOutput_ActiveEdge.md&amp;value=---%0Auid%3A%20Bonsai.DAQmx.DigitalOutput.ActiveEdge%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/bonsai-rx/daqmx/blob/main/src/Bonsai.DAQmx/DigitalOutput.cs/#L38">View Source</a>
+  </span>
+  <a id="Bonsai_DAQmx_DigitalOutput_ActiveEdge_" data-uid="Bonsai.DAQmx.DigitalOutput.ActiveEdge*"></a>
+  <h4 id="Bonsai_DAQmx_DigitalOutput_ActiveEdge" data-uid="Bonsai.DAQmx.DigitalOutput.ActiveEdge">ActiveEdge</h4>
+  <div class="markdown level1 summary"><p>Gets or sets a value specifying on which edge of a clock pulse sampling takes place.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SampleClockActiveEdge ActiveEdge { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">NationalInstruments.DAQmx.SampleClockActiveEdge</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/bonsai-rx/daqmx/new/main/docs/apidoc/new?filename=Bonsai_DAQmx_DigitalOutput_BufferSize.md&amp;value=---%0Auid%3A%20Bonsai.DAQmx.DigitalOutput.BufferSize%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/bonsai-rx/daqmx/blob/main/src/Bonsai.DAQmx/DigitalOutput.cs/#L52">View Source</a>
+  </span>
+  <a id="Bonsai_DAQmx_DigitalOutput_BufferSize_" data-uid="Bonsai.DAQmx.DigitalOutput.BufferSize*"></a>
+  <h4 id="Bonsai_DAQmx_DigitalOutput_BufferSize" data-uid="Bonsai.DAQmx.DigitalOutput.BufferSize">BufferSize</h4>
+  <div class="markdown level1 summary"><p>Gets or sets the number of samples to generate, for finite samples, or the
+size of the buffer for continuous samples.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int BufferSize { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">Int32</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/bonsai-rx/daqmx/new/main/docs/apidoc/new?filename=Bonsai_DAQmx_DigitalOutput_Channels.md&amp;value=---%0Auid%3A%20Bonsai.DAQmx.DigitalOutput.Channels%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/bonsai-rx/daqmx/blob/main/src/Bonsai.DAQmx/DigitalOutput.cs/#L59">View Source</a>
+  </span>
+  <a id="Bonsai_DAQmx_DigitalOutput_Channels_" data-uid="Bonsai.DAQmx.DigitalOutput.Channels*"></a>
+  <h4 id="Bonsai_DAQmx_DigitalOutput_Channels" data-uid="Bonsai.DAQmx.DigitalOutput.Channels">Channels</h4>
+  <div class="markdown level1 summary"><p>Gets the collection of virtual output channels on which to write the
+logical values.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Collection&lt;DigitalOutputChannelConfiguration&gt; Channels { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.collection-1">Collection</a>&lt;<a class="xref" href="Bonsai.DAQmx.DigitalOutputChannelConfiguration.html">DigitalOutputChannelConfiguration</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/bonsai-rx/daqmx/new/main/docs/apidoc/new?filename=Bonsai_DAQmx_DigitalOutput_SampleMode.md&amp;value=---%0Auid%3A%20Bonsai.DAQmx.DigitalOutput.SampleMode%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/bonsai-rx/daqmx/blob/main/src/Bonsai.DAQmx/DigitalOutput.cs/#L45">View Source</a>
+  </span>
+  <a id="Bonsai_DAQmx_DigitalOutput_SampleMode_" data-uid="Bonsai.DAQmx.DigitalOutput.SampleMode*"></a>
+  <h4 id="Bonsai_DAQmx_DigitalOutput_SampleMode" data-uid="Bonsai.DAQmx.DigitalOutput.SampleMode">SampleMode</h4>
+  <div class="markdown level1 summary"><p>Gets or sets a value specifying whether the writer task will generate
+a finite number of samples or if it continuously generates samples.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SampleQuantityMode SampleMode { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">NationalInstruments.DAQmx.SampleQuantityMode</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/bonsai-rx/daqmx/new/main/docs/apidoc/new?filename=Bonsai_DAQmx_DigitalOutput_SampleRate.md&amp;value=---%0Auid%3A%20Bonsai.DAQmx.DigitalOutput.SampleRate%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/bonsai-rx/daqmx/blob/main/src/Bonsai.DAQmx/DigitalOutput.cs/#L33">View Source</a>
+  </span>
+  <a id="Bonsai_DAQmx_DigitalOutput_SampleRate_" data-uid="Bonsai.DAQmx.DigitalOutput.SampleRate*"></a>
+  <h4 id="Bonsai_DAQmx_DigitalOutput_SampleRate" data-uid="Bonsai.DAQmx.DigitalOutput.SampleRate">SampleRate</h4>
+  <div class="markdown level1 summary"><p>Gets or sets the sampling rate for writing logical values, in samples
+per second.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public double SampleRate { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">Double</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/bonsai-rx/daqmx/new/main/docs/apidoc/new?filename=Bonsai_DAQmx_DigitalOutput_SignalSource.md&amp;value=---%0Auid%3A%20Bonsai.DAQmx.DigitalOutput.SignalSource%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/bonsai-rx/daqmx/blob/main/src/Bonsai.DAQmx/DigitalOutput.cs/#L26">View Source</a>
+  </span>
+  <a id="Bonsai_DAQmx_DigitalOutput_SignalSource_" data-uid="Bonsai.DAQmx.DigitalOutput.SignalSource*"></a>
+  <h4 id="Bonsai_DAQmx_DigitalOutput_SignalSource" data-uid="Bonsai.DAQmx.DigitalOutput.SignalSource">SignalSource</h4>
+  <div class="markdown level1 summary"><p>Gets or sets the optional source terminal of the clock. If not specified,
+the internal clock of the device will be used.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string SignalSource { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/bonsai-rx/daqmx/new/main/docs/apidoc/new?filename=Bonsai_DAQmx_DigitalOutput_Process_System_IObservable_OpenCV_Net_Mat__.md&amp;value=---%0Auid%3A%20Bonsai.DAQmx.DigitalOutput.Process(System.IObservable%7BOpenCV.Net.Mat%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/bonsai-rx/daqmx/blob/main/src/Bonsai.DAQmx/DigitalOutput.cs/#L159">View Source</a>
+  </span>
+  <a id="Bonsai_DAQmx_DigitalOutput_Process_" data-uid="Bonsai.DAQmx.DigitalOutput.Process*"></a>
+  <h4 id="Bonsai_DAQmx_DigitalOutput_Process_System_IObservable_OpenCV_Net_Mat__" data-uid="Bonsai.DAQmx.DigitalOutput.Process(System.IObservable{OpenCV.Net.Mat})">Process(IObservable&lt;Mat&gt;)</h4>
+  <div class="markdown level1 summary"><p>Writes logical values to one or more DAQmx digital output lines
+from an observable sequence of sample buffers.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override IObservable&lt;Mat&gt; Process(IObservable&lt;Mat&gt; source)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.iobservable-1">IObservable</a>&lt;<a class="xref" href="https://horizongir.github.io/opencv.net/api/OpenCV.Net.Mat.html">Mat</a>&gt;</td>
+        <td><span class="parametername">source</span></td>
+        <td><p>A sequence of 2D <a class="xref" href="https://horizongir.github.io/opencv.net/api/OpenCV.Net.Mat.html">Mat</a> objects storing the logical values.
+Each row corresponds to a channel in the signal generation task, and each
+column to a sample from each of the channels. The order of the channels follows
+the order in which you specify the channels in the <a class="xref" href="Bonsai.DAQmx.DigitalOutput.html#Bonsai_DAQmx_DigitalOutput_Channels">Channels</a>
+property. Each sample can represent either a single line or a bitmask
+representing the state of all digital lines in a single port, depending
+on the configuration of the virtual channel.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.iobservable-1">IObservable</a>&lt;<a class="xref" href="https://horizongir.github.io/opencv.net/api/OpenCV.Net.Mat.html">Mat</a>&gt;</td>
+        <td><p>An observable sequence that is identical to the <code data-dev-comment-type="paramref" class="paramref">source</code>
+sequence but where there is an additional side effect of writing logical
+values to one or more DAQmx digital output lines.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">Bonsai.Combinator&lt;OpenCV.Net.Mat, OpenCV.Net.Mat&gt;.Process(System.IObservable&lt;OpenCV.Net.Mat&gt;)</span></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/bonsai-rx/daqmx/new/main/docs/apidoc/new?filename=Bonsai_DAQmx_DigitalOutput_Process_System_IObservable_System_Boolean__.md&amp;value=---%0Auid%3A%20Bonsai.DAQmx.DigitalOutput.Process(System.IObservable%7BSystem.Boolean%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/bonsai-rx/daqmx/blob/main/src/Bonsai.DAQmx/DigitalOutput.cs/#L112">View Source</a>
+  </span>
+  <a id="Bonsai_DAQmx_DigitalOutput_Process_" data-uid="Bonsai.DAQmx.DigitalOutput.Process*"></a>
+  <h4 id="Bonsai_DAQmx_DigitalOutput_Process_System_IObservable_System_Boolean__" data-uid="Bonsai.DAQmx.DigitalOutput.Process(System.IObservable{System.Boolean})">Process(IObservable&lt;Boolean&gt;)</h4>
+  <div class="markdown level1 summary"><p>Writes an observable sequence of logical values to one or more DAQmx
+digital output lines.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IObservable&lt;bool&gt; Process(IObservable&lt;bool&gt; source)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.iobservable-1">IObservable</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">Boolean</a>&gt;</td>
+        <td><span class="parametername">source</span></td>
+        <td><p>A sequence of boolean values representing the logical levels to write
+to one or more DAQmx digital output lines.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.iobservable-1">IObservable</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">Boolean</a>&gt;</td>
+        <td><p>An observable sequence that is identical to the <code data-dev-comment-type="paramref" class="paramref">source</code>
+sequence but where there is an additional side effect of writing logical
+values to one or more DAQmx digital output lines.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/bonsai-rx/daqmx/new/main/docs/apidoc/new?filename=Bonsai_DAQmx_DigitalOutput_Process_System_IObservable_System_Byte__.md&amp;value=---%0Auid%3A%20Bonsai.DAQmx.DigitalOutput.Process(System.IObservable%7BSystem.Byte%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/bonsai-rx/daqmx/blob/main/src/Bonsai.DAQmx/DigitalOutput.cs/#L133">View Source</a>
+  </span>
+  <a id="Bonsai_DAQmx_DigitalOutput_Process_" data-uid="Bonsai.DAQmx.DigitalOutput.Process*"></a>
+  <h4 id="Bonsai_DAQmx_DigitalOutput_Process_System_IObservable_System_Byte__" data-uid="Bonsai.DAQmx.DigitalOutput.Process(System.IObservable{System.Byte})">Process(IObservable&lt;Byte&gt;)</h4>
+  <div class="markdown level1 summary"><p>Writes an observable sequence of logical values to one or more DAQmx
+digital output lines.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IObservable&lt;byte&gt; Process(IObservable&lt;byte&gt; source)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.iobservable-1">IObservable</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">Byte</a>&gt;</td>
+        <td><span class="parametername">source</span></td>
+        <td><p>A sequence of 8-bit unsigned integers representing the state of digital
+output lines in a local virtual port channel.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.iobservable-1">IObservable</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">Byte</a>&gt;</td>
+        <td><p>An observable sequence that is identical to the <code data-dev-comment-type="paramref" class="paramref">source</code>
+sequence but where there is an additional side effect of writing logical
+values to one or more DAQmx digital output lines.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/bonsai-rx/daqmx/blob/main/docs/apidoc/Bonsai_DAQmx_DigitalOutput.md/#L2" class="contribution-link">Improve this Doc</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/bonsai-rx/daqmx/blob/main/src/Bonsai.DAQmx/DigitalOutput.cs/#L16" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

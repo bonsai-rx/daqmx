@@ -1,0 +1,544 @@
+{
+  "homepages": [],
+  "source_base_path": "D:/a/daqmx/daqmx/docs",
+  "xrefmap": "xrefmap.yml",
+  "files": [
+    {
+      "type": "Resource",
+      "output": {
+        "resource": {
+          "relative_path": "index.json"
+        }
+      },
+      "is_incremental": false
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Bonsai.DAQmx.AnalogChannelConfiguration.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Bonsai.DAQmx.AnalogChannelConfiguration.html",
+          "hash": "61rAgOyoblhjKU7pYovrIhwk775iOkSfYUck/2pyew8="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Bonsai.DAQmx.AnalogInput.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Bonsai.DAQmx.AnalogInput.html",
+          "hash": "Py/iUxrzSwqfd28mClJHHSZ3q/lwD202lomJg7CcrwM="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Bonsai.DAQmx.AnalogInputChannelConfiguration.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Bonsai.DAQmx.AnalogInputChannelConfiguration.html",
+          "hash": "6o4BasmvvLNTm1O2DVkMtg7zB5dUnIS6Zsn/qHMrFo4="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Bonsai.DAQmx.AnalogOutput.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Bonsai.DAQmx.AnalogOutput.html",
+          "hash": "izyeklUV8jJv3Tz3yszsXwI4yPwNoKz+EeDw50ezt9M="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Bonsai.DAQmx.AnalogOutputChannelConfiguration.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Bonsai.DAQmx.AnalogOutputChannelConfiguration.html",
+          "hash": "EffuTeaj4p+vKBikIA0VR5e39jyIXANYIC61tN67TxU="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Bonsai.DAQmx.DigitalChannelConfiguration.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Bonsai.DAQmx.DigitalChannelConfiguration.html",
+          "hash": "nmLQORYrFH7V0uLlu6Kf5dZrhkfRwvbtlruQFoEIhpA="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Bonsai.DAQmx.DigitalInput.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Bonsai.DAQmx.DigitalInput.html",
+          "hash": "H+O5eh2uRHLymfdwWX9Y7NS+ljeafRPZvyNAohRohb4="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Bonsai.DAQmx.DigitalInputChannelConfiguration.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Bonsai.DAQmx.DigitalInputChannelConfiguration.html",
+          "hash": "WDSRoJqZT2hSmj4pjD/xWmcJGsZvD/CummuJj5KpwLY="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Bonsai.DAQmx.DigitalOutput.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Bonsai.DAQmx.DigitalOutput.html",
+          "hash": "OkdFRDveDdF4z1JwaY4ZfcxrAzDnYjCn917tcHPQokM="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Bonsai.DAQmx.DigitalOutputChannelConfiguration.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Bonsai.DAQmx.DigitalOutputChannelConfiguration.html",
+          "hash": "IKqiJt7bdGhZxXs6NzGY7HoXJqmhLRHVVtt1W5fS0js="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Bonsai.DAQmx.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Bonsai.DAQmx.html",
+          "hash": "ORWM4vQJuuTmTzgMunLCcAC520SxFN6rOKiLumN0Aio="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "api/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/toc.html",
+          "hash": "179JR2B9u4BtAkG7ypi/LuYEFaM8wxSpZ87/sHH9K4M="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/daqmx-analoginput.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/daqmx-analoginput.html",
+          "hash": "WR8yP69g03FcFhG5gj4svrtt+r8h5EhmLyABkp1gPJc="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/daqmx-analogoutput.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/daqmx-analogoutput.html",
+          "hash": "aC9ntUxyMdbX4A8Ehm4vb42qHgF2125mGG5Z0XZSHNs="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/daqmx-digitalinput.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/daqmx-digitalinput.html",
+          "hash": "5uJswZG5EKt4TSfG6Mr6yNRyMZ2R/pXi5d/2XdTpNPw="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/daqmx-digitaloutput.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/daqmx-digitaloutput.html",
+          "hash": "0tfiv6juz5EaGqsoca0xuBq9mQHBAFH+NBbRxXPl5pM="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/intro.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/intro.html",
+          "hash": "zAS1jiOw+E4FLonnXhvdxd5oTCns/Z06ahAtbilBeHA="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/manual.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/manual.html",
+          "hash": "+YcV7IubHsQup/eUt5mQFX88IWNFouCQ+IW095xK1GA="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "articles/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "articles/toc.html",
+          "hash": "5LzovH3Z9xxZXAL/5azf2Id4OVt9SOYml+QyC6IZQug="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "favicon.ico",
+      "output": {
+        "resource": {
+          "relative_path": "favicon.ico"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "index.md",
+      "output": {
+        ".html": {
+          "relative_path": "index.html",
+          "hash": "DsO/a4HbFN1elbIYKwQen+6L6Zg+LjKRFnIMy/uQOBM="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "logo.svg",
+      "output": {
+        "resource": {
+          "relative_path": "logo.svg"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "toc.html",
+          "hash": "CedbrX8hFDzNZPyW1+/A0sa5DfUDB/xFXc90XJOv5Tk="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "workflows/AnalogInput-Async.bonsai",
+      "output": {
+        "resource": {
+          "relative_path": "workflows/AnalogInput-Async.bonsai"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "workflows/AnalogInput-Async.svg",
+      "output": {
+        "resource": {
+          "relative_path": "workflows/AnalogInput-Async.svg"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "workflows/AnalogInput-Sync.bonsai",
+      "output": {
+        "resource": {
+          "relative_path": "workflows/AnalogInput-Sync.bonsai"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "workflows/AnalogInput-Sync.svg",
+      "output": {
+        "resource": {
+          "relative_path": "workflows/AnalogInput-Sync.svg"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "workflows/AnalogOutput-Continuous.bonsai",
+      "output": {
+        "resource": {
+          "relative_path": "workflows/AnalogOutput-Continuous.bonsai"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "workflows/AnalogOutput-Continuous.svg",
+      "output": {
+        "resource": {
+          "relative_path": "workflows/AnalogOutput-Continuous.svg"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "workflows/AnalogOutput-Finite.bonsai",
+      "output": {
+        "resource": {
+          "relative_path": "workflows/AnalogOutput-Finite.bonsai"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "workflows/AnalogOutput-Finite.svg",
+      "output": {
+        "resource": {
+          "relative_path": "workflows/AnalogOutput-Finite.svg"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "workflows/DigitalInput-Async.bonsai",
+      "output": {
+        "resource": {
+          "relative_path": "workflows/DigitalInput-Async.bonsai"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "workflows/DigitalInput-Async.svg",
+      "output": {
+        "resource": {
+          "relative_path": "workflows/DigitalInput-Async.svg"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "workflows/DigitalInput-Sync.bonsai",
+      "output": {
+        "resource": {
+          "relative_path": "workflows/DigitalInput-Sync.bonsai"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "workflows/DigitalInput-Sync.svg",
+      "output": {
+        "resource": {
+          "relative_path": "workflows/DigitalInput-Sync.svg"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "workflows/DigitalOutput-Continuous.bonsai",
+      "output": {
+        "resource": {
+          "relative_path": "workflows/DigitalOutput-Continuous.bonsai"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "workflows/DigitalOutput-Continuous.svg",
+      "output": {
+        "resource": {
+          "relative_path": "workflows/DigitalOutput-Continuous.svg"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "workflows/DigitalOutput-ContinuousSingleSample.bonsai",
+      "output": {
+        "resource": {
+          "relative_path": "workflows/DigitalOutput-ContinuousSingleSample.bonsai"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "workflows/DigitalOutput-ContinuousSingleSample.svg",
+      "output": {
+        "resource": {
+          "relative_path": "workflows/DigitalOutput-ContinuousSingleSample.svg"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "workflows/DigitalOutput-Finite.bonsai",
+      "output": {
+        "resource": {
+          "relative_path": "workflows/DigitalOutput-Finite.bonsai"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "workflows/DigitalOutput-Finite.svg",
+      "output": {
+        "resource": {
+          "relative_path": "workflows/DigitalOutput-Finite.svg"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    }
+  ],
+  "incremental_info": [
+    {
+      "status": {
+        "can_incremental": false,
+        "details": "Cannot build incrementally because last build info is missing.",
+        "incrementalPhase": "build",
+        "total_file_count": 0,
+        "skipped_file_count": 0,
+        "full_build_reason_code": "NoAvailableBuildCache"
+      },
+      "processors": {
+        "ConceptualDocumentProcessor": {
+          "can_incremental": false,
+          "incrementalPhase": "build",
+          "total_file_count": 7,
+          "skipped_file_count": 0
+        },
+        "ManagedReferenceDocumentProcessor": {
+          "can_incremental": false,
+          "incrementalPhase": "build",
+          "total_file_count": 15,
+          "skipped_file_count": 0
+        },
+        "ResourceDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor ResourceDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "incrementalPhase": "build",
+          "total_file_count": 0,
+          "skipped_file_count": 0
+        },
+        "TocDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "incrementalPhase": "build",
+          "total_file_count": 0,
+          "skipped_file_count": 0
+        }
+      }
+    },
+    {
+      "status": {
+        "can_incremental": false,
+        "details": "Cannot support incremental post processing, the reason is: should not trace intermediate info.",
+        "incrementalPhase": "postProcessing",
+        "total_file_count": 0,
+        "skipped_file_count": 0
+      },
+      "processors": {}
+    }
+  ],
+  "version_info": {},
+  "groups": [
+    {
+      "xrefmap": "xrefmap.yml"
+    }
+  ]
+}
