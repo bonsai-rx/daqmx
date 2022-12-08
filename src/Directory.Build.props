@@ -4,7 +4,7 @@
     <Authors>Gonçalo Lopes</Authors>
     <Copyright>Copyright © Gonçalo Lopes 2022</Copyright>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
-    <PackageProjectUrl>https://github.com/bonsai-rx/daqmx</PackageProjectUrl>
+    <PackageProjectUrl>https://bonsai-rx.org/daqmx</PackageProjectUrl>
     <PackageLicenseUrl>https://bonsai-rx.org/license</PackageLicenseUrl>
     <PackageIconUrl>https://bonsai-rx.org/assets/images/bonsai.png</PackageIconUrl>
     <PackageOutputPath>..\bin\$(Configuration)</PackageOutputPath>
