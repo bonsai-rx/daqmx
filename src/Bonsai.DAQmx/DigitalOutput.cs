@@ -75,7 +75,7 @@ namespace Bonsai.DAQmx
             return task;
         }
 
-        IObservable<TSource> Process<TSource>(IObservable<TSource> source, Action<DigitalMultiChannelWriter, TSource> onNext)
+        IObservable<TSource> ProcessSingleSample<TSource>(IObservable<TSource> source, Action<DigitalMultiChannelWriter, TSource> onNext)
         {
             return Observable.Defer(() =>
             {
@@ -111,14 +111,14 @@ namespace Bonsai.DAQmx
         /// </returns>
         public IObservable<bool> Process(IObservable<bool> source)
         {
-            return Process(source, (writer, value) =>
+            return ProcessSingleSample(source, (writer, value) =>
             {
                 writer.WriteSingleSampleSingleLine(autoStart: true, new[] { value });
             });
         }
 
         /// <summary>
-        /// Writes an observable sequence of logical values to one or more DAQmx
+        /// Writes an observable sequence of unsigned 8-bit samples to one or more DAQmx
         /// digital output lines.
         /// </summary>
         /// <param name="source">
@@ -132,9 +132,290 @@ namespace Bonsai.DAQmx
         /// </returns>
         public IObservable<byte> Process(IObservable<byte> source)
         {
-            return Process(source, (writer, value) =>
+            return ProcessSingleSample(source, (writer, value) =>
             {
                 writer.WriteSingleSamplePort(autoStart: true, new[] { value });
+            });
+        }
+
+        /// <summary>
+        /// Writes an observable sequence of boolean samples to one or more DAQmx
+        /// digital output lines.
+        /// </summary>
+        /// <param name="source">
+        /// A sequence of 1D arrays of boolean samples representing the state of a
+        /// digital output channel in a local virtual port.
+        /// </param>
+        /// <returns>
+        /// An observable sequence that is identical to the <paramref name="source"/>
+        /// sequence but where there is an additional side effect of writing logical
+        /// values to one or more DAQmx digital output lines.
+        /// </returns>
+        public IObservable<bool[]> Process(IObservable<bool[]> source)
+        {
+            return ProcessSingleSample(source, (writer, data) =>
+            {
+                writer.WriteSingleSampleSingleLine(autoStart: true, data);
+            });
+        }
+
+        /// <summary>
+        /// Writes an observable sequence of unsigned 8-bit samples to one or more DAQmx
+        /// digital output lines.
+        /// </summary>
+        /// <param name="source">
+        /// A sequence of 8-bit unsigned integer arrays representing the state of digital
+        /// output lines in a local virtual port channel.
+        /// </param>
+        /// <returns>
+        /// An observable sequence that is identical to the <paramref name="source"/>
+        /// sequence but where there is an additional side effect of writing logical
+        /// values to one or more DAQmx digital output lines.
+        /// </returns>
+        public IObservable<byte[]> Process(IObservable<byte[]> source)
+        {
+            return ProcessSingleSample(source, (writer, data) =>
+            {
+                writer.WriteSingleSamplePort(autoStart: true, data);
+            });
+        }
+
+        /// <summary>
+        /// Writes an observable sequence of unsigned 16-bit samples to one or more DAQmx
+        /// digital output lines.
+        /// </summary>
+        /// <param name="source">
+        /// A sequence of 16-bit unsigned integer arrays representing the state of digital
+        /// output lines in a local virtual port channel.
+        /// </param>
+        /// <returns>
+        /// An observable sequence that is identical to the <paramref name="source"/>
+        /// sequence but where there is an additional side effect of writing logical
+        /// values to one or more DAQmx digital output lines.
+        /// </returns>
+        public IObservable<ushort[]> Process(IObservable<ushort[]> source)
+        {
+            return ProcessSingleSample(source, (writer, data) =>
+            {
+                writer.WriteSingleSamplePort(autoStart: true, data);
+            });
+        }
+
+        /// <summary>
+        /// Writes an observable sequence of signed 16-bit samples to one or more DAQmx
+        /// digital output lines.
+        /// </summary>
+        /// <param name="source">
+        /// A sequence of 16-bit signed integer arrays representing the state of digital
+        /// output lines in a local virtual port channel.
+        /// </param>
+        /// <returns>
+        /// An observable sequence that is identical to the <paramref name="source"/>
+        /// sequence but where there is an additional side effect of writing logical
+        /// values to one or more DAQmx digital output lines.
+        /// </returns>
+        public IObservable<short[]> Process(IObservable<short[]> source)
+        {
+            return ProcessSingleSample(source, (writer, data) =>
+            {
+                writer.WriteSingleSamplePort(autoStart: true, data);
+            });
+        }
+
+        /// <summary>
+        /// Writes an observable sequence of unsigned 32-bit samples to one or more DAQmx
+        /// digital output lines.
+        /// </summary>
+        /// <param name="source">
+        /// A sequence of 32-bit unsigned integer arrays representing the state of digital
+        /// output lines in a local virtual port channel.
+        /// </param>
+        /// <returns>
+        /// An observable sequence that is identical to the <paramref name="source"/>
+        /// sequence but where there is an additional side effect of writing logical
+        /// values to one or more DAQmx digital output lines.
+        /// </returns>
+        public IObservable<uint[]> Process(IObservable<uint[]> source)
+        {
+            return ProcessSingleSample(source, (writer, data) =>
+            {
+                writer.WriteSingleSamplePort(autoStart: true, data);
+            });
+        }
+
+        /// <summary>
+        /// Writes an observable sequence of signed 32-bit samples to one or more DAQmx
+        /// digital output lines.
+        /// </summary>
+        /// <param name="source">
+        /// A sequence of 32-bit signed integer arrays representing the state of digital
+        /// output lines in a local virtual port channel.
+        /// </param>
+        /// <returns>
+        /// An observable sequence that is identical to the <paramref name="source"/>
+        /// sequence but where there is an additional side effect of writing logical
+        /// values to one or more DAQmx digital output lines.
+        /// </returns>
+        public IObservable<int[]> Process(IObservable<int[]> source)
+        {
+            return ProcessSingleSample(source, (writer, data) =>
+            {
+                writer.WriteSingleSamplePort(autoStart: true, data);
+            });
+        }
+
+        IObservable<TSource> ProcessMultiSample<TSource>(IObservable<TSource> source, Action<DigitalMultiChannelWriter, TSource> onNext)
+        {
+            return Observable.Defer(() =>
+            {
+                var task = CreateTask();
+                task.Timing.ConfigureSampleClock(SignalSource, SampleRate, ActiveEdge, SampleMode, BufferSize);
+                var digitalOutWriter = new DigitalMultiChannelWriter(task.Stream);
+                return Observable.Using(
+                    () => Disposable.Create(() =>
+                    {
+                        if (task.Timing.SampleQuantityMode == SampleQuantityMode.FiniteSamples)
+                        {
+                            task.WaitUntilDone();
+                        }
+                        task.Stop();
+                        task.Dispose();
+                    }),
+                    resource => source.Do(input =>
+                    {
+                        try { onNext(digitalOutWriter, input); }
+                        catch { task.Stop(); throw; }
+                    }));
+            });
+        }
+
+        /// <summary>
+        /// Writes logical values to one or more DAQmx digital output lines from
+        /// an observable sequence of unsigned 8-bit multi-channel sample buffers.
+        /// </summary>
+        /// <param name="source">
+        /// A sequence of multi-dimensional <see cref="byte"/> arrays storing the
+        /// logical values. Each row corresponds to a channel in the signal generation
+        /// task, and each column to a sample from each of the channels. The order of
+        /// the channels follows the order in which you specify the channels in the
+        /// <see cref="Channels"/> property. Each sample can represent either a single
+        /// line or a bitmask representing the state of all digital lines in a single
+        /// port, depending on the configuration of the virtual channel.
+        /// </param>
+        /// <returns>
+        /// An observable sequence that is identical to the <paramref name="source"/>
+        /// sequence but where there is an additional side effect of writing logical
+        /// values to one or more DAQmx digital output lines.
+        /// </returns>
+        public IObservable<byte[,]> Process(IObservable<byte[,]> source)
+        {
+            return ProcessMultiSample(source, (writer, data) =>
+            {
+                writer.WriteMultiSamplePort(autoStart: true, data);
+            });
+        }
+
+        /// <summary>
+        /// Writes logical values to one or more DAQmx digital output lines from
+        /// an observable sequence of unsigned 16-bit multi-channel sample buffers.
+        /// </summary>
+        /// <param name="source">
+        /// A sequence of multi-dimensional <see cref="ushort"/> arrays storing the
+        /// logical values. Each row corresponds to a channel in the signal generation
+        /// task, and each column to a sample from each of the channels. The order of
+        /// the channels follows the order in which you specify the channels in the
+        /// <see cref="Channels"/> property. Each sample can represent either a single
+        /// line or a bitmask representing the state of all digital lines in a single
+        /// port, depending on the configuration of the virtual channel.
+        /// </param>
+        /// <returns>
+        /// An observable sequence that is identical to the <paramref name="source"/>
+        /// sequence but where there is an additional side effect of writing logical
+        /// values to one or more DAQmx digital output lines.
+        /// </returns>
+        public IObservable<ushort[,]> Process(IObservable<ushort[,]> source)
+        {
+            return ProcessMultiSample(source, (writer, data) =>
+            {
+                writer.WriteMultiSamplePort(autoStart: true, data);
+            });
+        }
+
+        /// <summary>
+        /// Writes logical values to one or more DAQmx digital output lines from
+        /// an observable sequence of signed 16-bit multi-channel sample buffers.
+        /// </summary>
+        /// <param name="source">
+        /// A sequence of multi-dimensional <see cref="short"/> arrays storing the
+        /// logical values. Each row corresponds to a channel in the signal generation
+        /// task, and each column to a sample from each of the channels. The order of
+        /// the channels follows the order in which you specify the channels in the
+        /// <see cref="Channels"/> property. Each sample can represent either a single
+        /// line or a bitmask representing the state of all digital lines in a single
+        /// port, depending on the configuration of the virtual channel.
+        /// </param>
+        /// <returns>
+        /// An observable sequence that is identical to the <paramref name="source"/>
+        /// sequence but where there is an additional side effect of writing logical
+        /// values to one or more DAQmx digital output lines.
+        /// </returns>
+        public IObservable<short[,]> Process(IObservable<short[,]> source)
+        {
+            return ProcessMultiSample(source, (writer, data) =>
+            {
+                writer.WriteMultiSamplePort(autoStart: true, data);
+            });
+        }
+
+        /// <summary>
+        /// Writes logical values to one or more DAQmx digital output lines from
+        /// an observable sequence of unsigned 32-bit multi-channel sample buffers.
+        /// </summary>
+        /// <param name="source">
+        /// A sequence of multi-dimensional <see cref="uint"/> arrays storing the
+        /// logical values. Each row corresponds to a channel in the signal generation
+        /// task, and each column to a sample from each of the channels. The order of
+        /// the channels follows the order in which you specify the channels in the
+        /// <see cref="Channels"/> property. Each sample can represent either a single
+        /// line or a bitmask representing the state of all digital lines in a single
+        /// port, depending on the configuration of the virtual channel.
+        /// </param>
+        /// <returns>
+        /// An observable sequence that is identical to the <paramref name="source"/>
+        /// sequence but where there is an additional side effect of writing logical
+        /// values to one or more DAQmx digital output lines.
+        /// </returns>
+        public IObservable<uint[,]> Process(IObservable<uint[,]> source)
+        {
+            return ProcessMultiSample(source, (writer, data) =>
+            {
+                writer.WriteMultiSamplePort(autoStart: true, data);
+            });
+        }
+
+        /// <summary>
+        /// Writes logical values to one or more DAQmx digital output lines from
+        /// an observable sequence of signed 32-bit multi-channel sample buffers.
+        /// </summary>
+        /// <param name="source">
+        /// A sequence of multi-dimensional <see cref="int"/> arrays storing the
+        /// logical values. Each row corresponds to a channel in the signal generation
+        /// task, and each column to a sample from each of the channels. The order of
+        /// the channels follows the order in which you specify the channels in the
+        /// <see cref="Channels"/> property. Each sample can represent either a single
+        /// line or a bitmask representing the state of all digital lines in a single
+        /// port, depending on the configuration of the virtual channel.
+        /// </param>
+        /// <returns>
+        /// An observable sequence that is identical to the <paramref name="source"/>
+        /// sequence but where there is an additional side effect of writing logical
+        /// values to one or more DAQmx digital output lines.
+        /// </returns>
+        public IObservable<int[,]> Process(IObservable<int[,]> source)
+        {
+            return ProcessMultiSample(source, (writer, data) =>
+            {
+                writer.WriteMultiSamplePort(autoStart: true, data);
             });
         }
 
@@ -158,36 +439,38 @@ namespace Bonsai.DAQmx
         /// </returns>
         public override IObservable<Mat> Process(IObservable<Mat> source)
         {
-            return Observable.Defer(() =>
+            return ProcessMultiSample(source, (writer, input) =>
             {
-                var task = CreateTask();
-                task.Timing.ConfigureSampleClock(SignalSource, SampleRate, ActiveEdge, SampleMode, BufferSize);
-                var digitalOutWriter = new DigitalMultiChannelWriter(task.Stream);
-                return Observable.Using(
-                    () => Disposable.Create(() =>
-                    {
-                        if (task.Timing.SampleQuantityMode == SampleQuantityMode.FiniteSamples)
-                        {
-                            task.WaitUntilDone();
-                        }
-                        task.Stop();
-                        task.Dispose();
-                    }),
-                    resource => source.Do(input =>
-                    {
-                        var data = new byte[input.Rows, input.Cols];
-                        var dataHandle = GCHandle.Alloc(data, GCHandleType.Pinned);
-                        try
-                        {
-                            var dataHeader = new Mat(input.Rows, input.Cols, Depth.U8, 1, dataHandle.AddrOfPinnedObject());
-                            if (input.Depth != dataHeader.Depth) CV.Convert(input, dataHeader);
-                            else CV.Copy(input, dataHeader);
-                            digitalOutWriter.WriteMultiSamplePort(autoStart: true, data);
-                        }
-                        catch { task.Stop(); throw; }
-                        finally { dataHandle.Free(); }
-                    }));
+                switch (input.Depth)
+                {
+                    case Depth.U8:
+                    case Depth.S8:
+                        writer.WriteMultiSamplePort(autoStart: true, GetMultiSampleArray<byte>(input));
+                        break;
+                    case Depth.U16:
+                    case Depth.S16:
+                        writer.WriteMultiSamplePort(autoStart: true, GetMultiSampleArray<ushort>(input));
+                        break;
+                    case Depth.S32:
+                        writer.WriteMultiSamplePort(autoStart: true, GetMultiSampleArray<int>(input));
+                        break;
+                    default:
+                        throw new InvalidOperationException("The elements in the input buffer must have an integer depth type.");
+                }
             });
+        }
+
+        static TArray[,] GetMultiSampleArray<TArray>(Mat input) where TArray : unmanaged
+        {
+            var data = new TArray[input.Rows, input.Cols];
+            var dataHandle = GCHandle.Alloc(data, GCHandleType.Pinned);
+            try
+            {
+                var dataHeader = new Mat(input.Rows, input.Cols, input.Depth, 1, dataHandle.AddrOfPinnedObject());
+                CV.Copy(input, dataHeader);
+                return data;
+            }
+            finally { dataHandle.Free(); }
         }
     }
 }

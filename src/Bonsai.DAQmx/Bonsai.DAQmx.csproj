@@ -5,7 +5,7 @@
     <Description>Bonsai DAQmx Library containing modules for acquisition and control of NI-DAQmx boards.</Description>
     <PackageTags>Bonsai Rx DAQmx</PackageTags>
     <TargetFramework>net462</TargetFramework>
-    <VersionPrefix>0.2.1</VersionPrefix>
+    <VersionPrefix>0.3.0</VersionPrefix>
   </PropertyGroup>
 
   <ItemGroup>
