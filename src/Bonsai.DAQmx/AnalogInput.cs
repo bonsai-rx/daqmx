@@ -18,6 +18,15 @@ namespace Bonsai.DAQmx
     {
         readonly Collection<AnalogInputChannelConfiguration> channels = new Collection<AnalogInputChannelConfiguration>();
 
+
+        /// <summary>
+        /// Gets or sets the optional trigger terminal of the clock. If not specified,
+        /// the internal trigger of the device will be used.
+        /// </summary>
+        [Description("The optional trigger terminal of the clock. If not specified, the internal trigger of the device will be used.")]
+        public string SignalTrigger { get; set; } = string.Empty;
+
+
         /// <summary>
         /// Gets or sets the optional source terminal of the clock. If not specified,
         /// the internal clock of the device will be used.
@@ -104,9 +113,17 @@ namespace Bonsai.DAQmx
                 var task = CreateTask();
                 var bufferSize = BufferSize;
                 task.Timing.ConfigureSampleClock(SignalSource, SampleRate, ActiveEdge, SampleMode, bufferSize);
+
+                if (!SignalTrigger.Equals(string.Empty)) { 
+                    task.Triggers.StartTrigger.ConfigureDigitalEdgeTrigger(SignalTrigger, DigitalEdgeStartTriggerEdge.Rising);
+                }
+
                 task.Control(TaskAction.Verify);
+                task.Start();
+                
                 var analogInReader = new AnalogMultiChannelReader(task.Stream);
                 var samplesPerChannel = SamplesPerChannel.GetValueOrDefault(bufferSize);
+
                 AsyncCallback analogCallback = null;
                 analogCallback = new AsyncCallback(result =>
                 {
@@ -118,6 +135,7 @@ namespace Bonsai.DAQmx
 
                 analogInReader.SynchronizeCallbacks = true;
                 analogInReader.BeginReadMultiSample(samplesPerChannel, analogCallback, null);
+
                 return Disposable.Create(() =>
                 {
                     task.Stop();
@@ -155,9 +173,16 @@ namespace Bonsai.DAQmx
                 {
                     task.Timing.ConfigureSampleClock(SignalSource, sampleRate, ActiveEdge, SampleMode, bufferSize);
                 }
+
+                if (!SignalTrigger.Equals(string.Empty))
+                {
+                    task.Triggers.StartTrigger.ConfigureDigitalEdgeTrigger(SignalTrigger, DigitalEdgeStartTriggerEdge.Rising);
+                }
+
                 task.Control(TaskAction.Verify);
                 var analogInReader = new AnalogMultiChannelReader(task.Stream);
                 var samplesPerChannel = SamplesPerChannel.GetValueOrDefault(bufferSize);
+                task.Start();
                 return Observable.Using(() => Disposable.Create(
                     () =>
                     {

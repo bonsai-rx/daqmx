@@ -18,6 +18,13 @@ namespace Bonsai.DAQmx
     public class AnalogOutput : Sink<Mat>
     {
         readonly Collection<AnalogOutputChannelConfiguration> channels = new Collection<AnalogOutputChannelConfiguration>();
+        
+        /// <summary>
+        /// Gets or sets the optional trigger terminal of the clock. If not specified,
+        /// the internal trigger of the device will be used.
+        /// </summary>
+        [Description("The optional trigger terminal of the clock. If not specified, the internal trigger of the device will be used.")]
+        public string SignalTrigger { get; set; } = string.Empty;
 
         /// <summary>
         /// Gets or sets the optional source terminal of the clock. If not specified,
@@ -78,6 +85,8 @@ namespace Bonsai.DAQmx
         /// </returns>
         public IObservable<double> Process(IObservable<double> source)
         {
+            Console.WriteLine("Wrong");
+
             return Observable.Defer(() =>
             {
                 var task = new Task();
@@ -93,6 +102,7 @@ namespace Bonsai.DAQmx
 
                 task.Control(TaskAction.Verify);
                 var analogOutWriter = new AnalogMultiChannelWriter(task.Stream);
+                task.Start();
                 return Observable.Using(
                     () => Disposable.Create(() =>
                     {
@@ -134,7 +144,14 @@ namespace Bonsai.DAQmx
 
                 task.Control(TaskAction.Verify);
                 task.Timing.ConfigureSampleClock(SignalSource, SampleRate, ActiveEdge, SampleMode, BufferSize);
+
+                if (!SignalTrigger.Equals(string.Empty))
+                { 
+                    task.Triggers.StartTrigger.ConfigureDigitalEdgeTrigger(SignalTrigger, DigitalEdgeStartTriggerEdge.Rising);
+                }
+                task.Start();
                 var analogOutWriter = new AnalogMultiChannelWriter(task.Stream);
+
                 return Observable.Using(
                     () => Disposable.Create(() =>
                     {
@@ -142,6 +159,7 @@ namespace Bonsai.DAQmx
                         {
                             task.WaitUntilDone();
                         }
+
                         task.Stop();
                         task.Dispose();
                     }),
@@ -154,7 +172,13 @@ namespace Bonsai.DAQmx
                             var dataHeader = new Mat(input.Rows, input.Cols, Depth.F64, 1, dataHandle.AddrOfPinnedObject());
                             if (input.Depth != dataHeader.Depth) CV.Convert(input, dataHeader);
                             else CV.Copy(input, dataHeader);
-                            analogOutWriter.WriteMultiSample(autoStart: true, data);
+
+                            if (SignalTrigger.Equals(string.Empty)) { 
+                                analogOutWriter.WriteMultiSample(autoStart: true, data);
+                            } else
+                            {
+                                analogOutWriter.WriteMultiSample(autoStart: false, data);
+                            }
                         }
                         finally { dataHandle.Free(); }
                     }));
