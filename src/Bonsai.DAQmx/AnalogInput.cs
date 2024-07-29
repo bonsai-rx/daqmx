@@ -173,7 +173,7 @@ namespace Bonsai.DAQmx
                 {
                     task.Timing.ConfigureSampleClock(SignalSource, sampleRate, ActiveEdge, SampleMode, bufferSize);
                 }
-
+                 
                 if (!SignalTrigger.Equals(string.Empty))
                 {
                     task.Triggers.StartTrigger.ConfigureDigitalEdgeTrigger(SignalTrigger, DigitalEdgeStartTriggerEdge.Rising);
