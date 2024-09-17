@@ -1,5 +1,4 @@
-How to use
-==========
+# How to use
 
 `Bonsai.DAQmx` provides an interface for data acquisition and signal generation on NI hardware using four distinct operators.
 

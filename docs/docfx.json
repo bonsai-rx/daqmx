@@ -21,8 +21,7 @@
         ],
         "exclude": [
           "_site/**",
-          "filter.yml",
-          "bonsai/**"
+          "filter.yml"
         ]
       }
     ],
@@ -48,12 +47,7 @@
       "_appTitle": "Bonsai - DAQmx",
       "_enableSearch": true,
       "pdf": false,
-      "_appFooter": "&copy; 2024 Bonsai Foundation CIC and Contributors. Made with <a href=\"https://dotnet.github.io/docfx\">docfx</a>",
-      "_gitContribute": {
-        "repo": "https://github.com/bonsai-rx/daqmx",
-        "branch": "main",
-        "apiSpecFolder": "apidoc"
-      }
+      "_appFooter": "&copy; 2024 Bonsai Foundation CIC and Contributors. Made with <a href=\"https://dotnet.github.io/docfx\">docfx</a>"
     },
     "overwrite": [
       {
