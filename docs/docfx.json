@@ -21,7 +21,8 @@
         ],
         "exclude": [
           "_site/**",
-          "filter.yml"
+          "filter.yml",
+          "apidoc/**"
         ]
       }
     ],
