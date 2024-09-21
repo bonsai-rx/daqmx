@@ -7,11 +7,11 @@ uid: Bonsai.DAQmx.AnalogInput
 If no input source is specified, data will be collected asynchronously every time a new buffer is filled.
 
 :::workflow
-![AnalogInput-Async](~/workflows/AnalogInput-Async.bonsai)
+![AnalogInput-Async](../workflows/AnalogInput-Async.bonsai)
 :::
 
 Alternatively, if an input observable sequence is provided, a new data buffer will be collected every time a new notification is emitted by the input source.
 
 :::workflow
-![AnalogInput-Sync](~/workflows/AnalogInput-Sync.bonsai)
+![AnalogInput-Sync](../workflows/AnalogInput-Sync.bonsai)
 :::

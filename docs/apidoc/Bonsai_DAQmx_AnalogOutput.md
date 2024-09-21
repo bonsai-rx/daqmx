@@ -7,11 +7,11 @@ uid: Bonsai.DAQmx.AnalogOutput
 Signals can be generated continuously, where a ring buffer is constanty updated with new data arriving from the source sequence.
 
 :::workflow
-![AnalogOutput-Continuous](~/workflows/AnalogOutput-Continuous.bonsai)
+![AnalogOutput-Continuous](../workflows/AnalogOutput-Continuous.bonsai)
 :::
 
 Alternatively, signals can also be generated with a finite number of samples, in which case the input buffers will provide samples until the specified buffer size is reached. In this case, the operator will wait for the task to finish generating the specified number of samples.
 
 :::workflow
-![AnalogOutput-Finite](~/workflows/AnalogOutput-Finite.bonsai)
+![AnalogOutput-Finite](../workflows/AnalogOutput-Finite.bonsai)
 :::

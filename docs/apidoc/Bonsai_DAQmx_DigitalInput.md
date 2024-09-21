@@ -9,11 +9,11 @@ Digital lines can be grouped as a port when creating the local virtual channel, 
 If no input source is specified, samples will be collected asynchronously every time a new buffer is filled.
 
 :::workflow
-![DigitalInput-Async](~/workflows/DigitalInput-Async.bonsai)
+![DigitalInput-Async](../workflows/DigitalInput-Async.bonsai)
 :::
 
 Alternatively, if an input observable sequence is provided, a new sample buffer will be collected every time a new notification is emitted by the input source.
 
 :::workflow
-![DigitalInput-Sync](~/workflows/DigitalInput-Sync.bonsai)
+![DigitalInput-Sync](../workflows/DigitalInput-Sync.bonsai)
 :::

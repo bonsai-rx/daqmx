@@ -9,17 +9,17 @@ Each logical value sample can represent either a single line or a bitmask repres
 Signals can be generated continuously, where a ring buffer is constanty updated with new data arriving from the source sequence.
 
 :::workflow
-![DigitalOutput-Continuous](~/workflows/DigitalOutput-Continuous.bonsai)
+![DigitalOutput-Continuous](../workflows/DigitalOutput-Continuous.bonsai)
 :::
 
 Logical values can also be provided by a source of integers specifying a bitmask with the state of all digital lines in a single port.
 
 :::workflow
-![DigitalOutput-ContinuousSingleSample](~/workflows/DigitalOutput-ContinuousSingleSample.bonsai)
+![DigitalOutput-ContinuousSingleSample](../workflows/DigitalOutput-ContinuousSingleSample.bonsai)
 :::
 
 Alternatively, signals can also be generated with a finite number of samples, in which case the input buffers will provide samples until the specified buffer size is reached. In this case, the operator will wait for the task to finish generating the specified number of samples.
 
 :::workflow
-![DigitalOutput-Finite](~/workflows/DigitalOutput-Finite.bonsai)
+![DigitalOutput-Finite](../workflows/DigitalOutput-Finite.bonsai)
 :::
