@@ -1,5 +1,4 @@
-How to use
-==========
+# How to use
 
 `Bonsai.DAQmx` provides an interface for data acquisition and signal generation on NI hardware using four distinct operators.
 
@@ -8,13 +7,13 @@ In order to use any of the operators, you need to specify a collection of physic
 Working examples for each of these operators can be found in the extended description for each operator, which we cover below.
 
 ## AnalogInput
-[!include[AnalogInput](~/articles/daqmx-analoginput.md)]
+[!include[AnalogInput](../apidoc/Bonsai_DAQmx_AnalogInput.md)]
 
 ## AnalogOutput
-[!include[AnalogOutput](~/articles/daqmx-analogoutput.md)]
+[!include[AnalogOutput](../apidoc/Bonsai_DAQmx_AnalogOutput.md)]
 
 ## DigitalInput
-[!include[DigitalInput](~/articles/daqmx-digitalinput.md)]
+[!include[DigitalInput](../apidoc/Bonsai_DAQmx_DigitalInput.md)]
 
 ## DigitalOutput
-[!include[DigitalOutput](~/articles/daqmx-digitaloutput.md)]
+[!include[DigitalOutput](../apidoc/Bonsai_DAQmx_DigitalOutput.md)]
