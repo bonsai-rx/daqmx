@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <Title>Bonsai - DAQmx Library</Title>
-    <Description>Bonsai DAQmx Library containing modules for acquisition and control of NI-DAQmx boards.</Description>
+    <Description>Bonsai DAQmx Library containing modules for acquisition and control of NI boards. NI-DAQmx version 25.3 (2025 Q2) is required.</Description>
 
     <TargetFramework>net462</TargetFramework>
   </PropertyGroup>
