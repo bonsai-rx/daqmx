@@ -135,13 +135,19 @@ namespace Bonsai.DAQmx
                 task.Control(TaskAction.Verify);
                 task.Timing.ConfigureSampleClock(SignalSource, SampleRate, ActiveEdge, SampleMode, BufferSize);
                 var analogOutWriter = new AnalogMultiChannelWriter(task.Stream);
+                void EnsureTaskIsDone()
+                {
+                    if (task.Timing.SampleQuantityMode == SampleQuantityMode.FiniteSamples)
+                    {
+                        task.WaitUntilDone();
+                    }
+                }
+
                 return Observable.Using(
                     () => Disposable.Create(() =>
                     {
-                        if (task.Timing.SampleQuantityMode == SampleQuantityMode.FiniteSamples)
-                        {
-                            task.WaitUntilDone();
-                        }
+                        if (!task.IsDone)
+                            EnsureTaskIsDone();
                         task.Stop();
                         task.Dispose();
                     }),
@@ -157,7 +163,7 @@ namespace Bonsai.DAQmx
                             analogOutWriter.WriteMultiSample(autoStart: true, data);
                         }
                         finally { dataHandle.Free(); }
-                    }));
+                    }, EnsureTaskIsDone));
             });
         }
     }

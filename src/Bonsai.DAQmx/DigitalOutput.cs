@@ -84,7 +84,8 @@ namespace Bonsai.DAQmx
                 return Observable.Using(
                     () => Disposable.Create(() =>
                     {
-                        task.WaitUntilDone();
+                        if (!task.IsDone)
+                            task.WaitUntilDone();
                         task.Stop();
                         task.Dispose();
                     }),
@@ -92,7 +93,7 @@ namespace Bonsai.DAQmx
                     {
                         try { onNext(digitalOutWriter, input); }
                         catch { task.Stop(); throw; }
-                    }));
+                    }, task.WaitUntilDone));
             });
         }
 
@@ -271,13 +272,19 @@ namespace Bonsai.DAQmx
                 var task = CreateTask();
                 task.Timing.ConfigureSampleClock(SignalSource, SampleRate, ActiveEdge, SampleMode, BufferSize);
                 var digitalOutWriter = new DigitalMultiChannelWriter(task.Stream);
+                void EnsureTaskIsDone()
+                {
+                    if (task.Timing.SampleQuantityMode == SampleQuantityMode.FiniteSamples)
+                    {
+                        task.WaitUntilDone();
+                    }
+                }
+
                 return Observable.Using(
                     () => Disposable.Create(() =>
                     {
-                        if (task.Timing.SampleQuantityMode == SampleQuantityMode.FiniteSamples)
-                        {
-                            task.WaitUntilDone();
-                        }
+                        if (!task.IsDone)
+                            EnsureTaskIsDone();
                         task.Stop();
                         task.Dispose();
                     }),
@@ -285,7 +292,7 @@ namespace Bonsai.DAQmx
                     {
                         try { onNext(digitalOutWriter, input); }
                         catch { task.Stop(); throw; }
-                    }));
+                    }, EnsureTaskIsDone));
             });
         }
 
